@@ -10,7 +10,7 @@ const navLinks = [
   { name: "Home", href: "/" },
   { name: "Browse Tuitions", href: "/tuitions" },
   { name: "Pricing", href: "/pricing" },
-  { name: "How It Works", href: "/how-it-works" },
+
   { name: "About", href: "/about" },
 ];
 
@@ -32,7 +32,7 @@ export default function Navbar() {
           href="/"
           className="flex shrink-0 items-center gap-2.5"
         >
-          <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-violet-500 to-indigo-600 text-xl font-bold text-white shadow-sm">
+          <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-linear-to-br from-violet-500 to-indigo-600 text-xl font-bold text-white shadow-sm">
             M
           </div>
 
@@ -59,7 +59,7 @@ export default function Navbar() {
                 {link.name}
 
                 {active && (
-                  <span className="absolute -bottom-[11px] left-0 h-[2px] w-full rounded-full bg-violet-600" />
+                  <span className="absolute -bottom-2.75 left-0 h-0.5 w-full rounded-full bg-violet-600" />
                 )}
               </Link>
             );
@@ -77,7 +77,7 @@ export default function Navbar() {
 
           <Link
             href="/sign-up"
-            className="rounded-lg bg-gradient-to-r from-violet-600 to-indigo-600 px-5 py-2.5 text-[13px] font-semibold text-white shadow-sm transition-all duration-200 hover:from-violet-700 hover:to-indigo-700 hover:shadow-md"
+            className="rounded-lg bg-linear-to-r from-violet-600 to-indigo-600 px-5 py-2.5 text-[13px] font-semibold text-white shadow-sm transition-all duration-200 hover:from-violet-700 hover:to-indigo-700 hover:shadow-md"
           >
             Sign Up
           </Link>

@@ -118,7 +118,7 @@ export default function PricingPage() {
               </span>
             </div>
 
-            <p className="mt-4 min-h-[48px] text-sm leading-6 text-[#858B94]">
+            <p className="mt-4 min-h-12 text-sm leading-6 text-[#858B94]">
               Unlimited reach, verified credential badges, and priority
               matching.
             </p>

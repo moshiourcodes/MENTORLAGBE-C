@@ -67,9 +67,9 @@ export default function Hero() {
 
           {/* Main Heading */}
           <h1 className="text-[38px] font-extrabold leading-[1.12] tracking-[-1.5px] text-[#111827] sm:text-[48px] lg:text-[52px]">
-            Find The Rifght Tutor{" "}
+            Find The Rifght Tutor For{" "}
             <span className="text-[#399B98]">
-              For Your Learning Journey
+              Your Learning Journey
             </span>{" "}
             Today
           </h1>
@@ -254,3 +254,13 @@ export default function Hero() {
     </section>
   );
 }
+
+
+
+
+
+
+
+
+
+

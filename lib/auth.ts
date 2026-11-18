@@ -1,28 +1,46 @@
+import { betterAuth } from "better-auth"
+import { MongoClient } from "mongodb"
+import { mongodbAdapter } from "@better-auth/mongo-adapter"
 
-import { betterAuth } from "better-auth";
-import { MongoClient } from "mongodb";
-import { mongodbAdapter } from "@better-auth/mongo-adapter";
-const client = new MongoClient(process.env.BETTER_AUTH_DB_URI as string);
-const db = client.db('mentorlagbe');
+const databaseUrl = process.env.BETTER_AUTH_DB_URI
+
+if (!databaseUrl) {
+  throw new Error("BETTER_AUTH_DB_URI is missing from environment variables.")
+}
+
+const client = new MongoClient(databaseUrl)
+const db = client.db("mentorlagbe")
 
 export const auth = betterAuth({
-
-   
-  //...
-    emailAndPassword: { 
-    enabled: true, 
-  }, 
-
-      socialProviders: {
-        google: { 
-            clientId: process.env.GOOGLE_CLIENT_ID as string, 
-            clientSecret: process.env.GOOGLE_CLIENT_SECRET as string, 
-        }, 
-    },
-
   database: mongodbAdapter(db, {
     client,
   }),
-  
 
-});
+  emailAndPassword: {
+    enabled: true,
+  },
+
+  user: {
+    additionalFields: {
+      role: {
+        type: "string",
+        required: true,
+        input: true,
+      },
+
+      plan: {
+        type: "string",
+        required: true,
+        defaultValue: "free",
+        input: false,
+      },
+    },
+  },
+
+  socialProviders: {
+    google: {
+      clientId: process.env.GOOGLE_CLIENT_ID as string,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
+    },
+  },
+})

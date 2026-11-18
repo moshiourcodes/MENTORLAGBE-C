@@ -56,7 +56,7 @@ const socialLinks = [
 export default function Footer() {
   return (
     <footer className="w-full bg-[#0E1931] text-white">
-      <div className="mx-auto max-w-[1440px] px-6 pb-6 pt-12 sm:px-10 lg:px-16">
+      <div className="mx-auto max-w-360 px-6 pb-6 pt-12 sm:px-10 lg:px-16">
 
         {/* Main Footer */}
         <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-12">
@@ -79,7 +79,7 @@ export default function Footer() {
               </span>
             </Link>
 
-            <p className="max-w-[230px] text-[12px] leading-[1.8] text-slate-400">
+            <p className="max-w-57.5 text-[12px] leading-[1.8] text-slate-400">
               Find your perfect tutor or share your expertise with
               students across Bangladesh.
             </p>
@@ -161,7 +161,7 @@ export default function Footer() {
               Connect With Us
             </h3>
 
-            <p className="mb-4 max-w-[250px] text-[11px] leading-[1.7] text-slate-400">
+            <p className="mb-4 max-w-62.5 text-[11px] leading-[1.7] text-slate-400">
               Follow our social channels for study tips, tutor
               highlights, and updates.
             </p>

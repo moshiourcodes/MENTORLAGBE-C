@@ -2,6 +2,8 @@
 import Hero from "@/components/Hero";
 import PricingPage from "./pricing/page";
 import HowItWorks from "@/components/HowItWorks";
+import CTA from "@/components/CTA";
+import TopCategories from "@/components/TopCategories";
 
 
 export default function Home() {
@@ -11,6 +13,8 @@ export default function Home() {
       <Hero />
   <PricingPage></PricingPage>
   <HowItWorks></HowItWorks>
+  <TopCategories></TopCategories>
+  <CTA></CTA>
     </main>
     
   );

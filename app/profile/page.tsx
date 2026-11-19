@@ -237,6 +237,8 @@ function ProfileForm({
                   <div className="flex h-24 w-24 items-center justify-center overflow-hidden rounded-full border-[3px] border-[#C9E9E5] bg-[#399B98] text-[34px] font-medium text-white shadow-sm">
                     {image ? (
                       <Image
+                      width={20}
+                      height={20}
                         src={image}
                         alt={name || "Profile"}
                         className="h-full w-full object-cover"

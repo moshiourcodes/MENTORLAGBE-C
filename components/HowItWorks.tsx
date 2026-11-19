@@ -1,10 +1,4 @@
-
-import {
-  Users,
-  Search,
-  Zap,
-  Award,
-} from "lucide-react";
+import { Users, Search, Zap, Award } from "lucide-react"
 
 const steps = [
   {
@@ -35,16 +29,15 @@ const steps = [
       "Begin your personalized tuition sessions and achieve your academic goals with confidence.",
     icon: Award,
   },
-];
+]
 
 export default function HowItWorks() {
   return (
-    <section className="w-full bg-[#F8FAFA] px-4 py-16 sm:px-6 lg:px-8">
+    <section className="w-full bg-[#F8FAFA] px-4 py-10 sm:px-6 sm:py-12 lg:px-8">
       <div className="mx-auto max-w-6xl">
-
         {/* Section Heading */}
-        <div className="mb-10 text-center">
-          <span className="inline-flex items-center rounded-full bg-[#E8F5F3] px-3 py-1 text-[10px] font-semibold uppercase tracking-wide text-[#399B98]">
+        <div className="mb-8 text-center">
+          <span className="inline-flex items-center rounded-full bg-[#E8F5F3] px-3 py-1 text-[10px] font-semibold tracking-wide text-[#399B98] uppercase">
             HOW IT WORKS
           </span>
 
@@ -61,7 +54,7 @@ export default function HowItWorks() {
         {/* Steps Grid */}
         <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {steps.map((step) => {
-            const Icon = step.icon;
+            const Icon = step.icon
 
             return (
               <div
@@ -88,11 +81,10 @@ export default function HowItWorks() {
                   {step.description}
                 </p>
               </div>
-            );
+            )
           })}
         </div>
-
       </div>
     </section>
-  );
+  )
 }

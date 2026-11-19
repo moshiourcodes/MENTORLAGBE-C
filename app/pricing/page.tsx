@@ -1,32 +1,26 @@
-
-import Link from "next/link";
-import {
-  ArrowRight,
-  CheckCircle2,
-  Sparkles,
-} from "lucide-react";
+import Link from "next/link"
+import { ArrowRight, CheckCircle2, Sparkles } from "lucide-react"
 
 const starterFeatures = [
   "Up to 2 tuition posts (Tutor)",
   "Up to 5 tuition bookmarks (Student)",
   "Direct tuition applications",
   "Basic profile & search filters",
-];
+]
 
 const proFeatures = [
   "Unlimited tuition posts & bookmarks",
   "Golden PRO verification badge",
   "Priority listing in search & category filters",
   "Priority applicant notifications & reviews",
-];
+]
 
 export default function PricingPage() {
   return (
-    <main className="min-h-screen bg-[#F8FAFA] px-4 py-16 sm:px-6 lg:px-8">
+    <section className="w-full bg-[#F8FAFA] px-4 py-10 sm:px-6 sm:py-12 lg:px-8">
       <div className="mx-auto max-w-5xl">
-
         {/* Header */}
-        <section className="mb-12 text-center">
+        <div className="mb-9 text-center">
           <span className="inline-flex items-center rounded-full bg-[#E7F4F2] px-3 py-1 text-xs font-semibold tracking-wide text-[#399B98]">
             PRICING
           </span>
@@ -39,21 +33,16 @@ export default function PricingPage() {
             Simple, transparent plans designed for committed students and
             ambitious academic tutors.
           </p>
-        </section>
+        </div>
 
         {/* Pricing Cards */}
-        <section className="grid grid-cols-1 items-stretch gap-8 md:grid-cols-2">
-
+        <div className="grid grid-cols-1 items-stretch gap-7 md:grid-cols-2">
           {/* Starter Plan */}
           <div className="flex flex-col rounded-2xl border border-[#E5E7EB] bg-white p-7 shadow-sm sm:p-8">
-
-            {/* Plan Header */}
             <div className="flex items-center justify-between gap-3">
-              <h2 className="text-xl font-bold text-[#17202D]">
-                Starter Plan
-              </h2>
+              <h2 className="text-xl font-bold text-[#17202D]">Starter Plan</h2>
 
-              <span className="whitespace-nowrap rounded-full bg-[#F5F6F7] px-3 py-1 text-xs font-medium text-[#737984]">
+              <span className="rounded-full bg-[#F5F6F7] px-3 py-1 text-xs font-medium whitespace-nowrap text-[#737984]">
                 Free Forever
               </span>
             </div>
@@ -64,12 +53,8 @@ export default function PricingPage() {
 
             {/* Price */}
             <div className="mt-5 flex items-baseline gap-2">
-              <span className="text-4xl font-bold text-[#111827]">
-                $0
-              </span>
-              <span className="text-sm text-[#9CA3AF]">
-                / month
-              </span>
+              <span className="text-4xl font-bold text-[#111827]">$0</span>
+              <span className="text-sm text-[#9CA3AF]">/ month</span>
             </div>
 
             {/* Features */}
@@ -88,7 +73,7 @@ export default function PricingPage() {
             </ul>
 
             {/* Button */}
-            <div className="mt-10 border-t border-gray-100 pt-6">
+            <div className="mt-8 border-t border-gray-100 pt-5">
               <Link
                 href="/sign-up?plan=free"
                 className="flex h-11 w-full items-center justify-center rounded-xl border border-[#DDE1E4] bg-white text-sm font-semibold text-[#17202D] transition hover:border-[#399B98] hover:bg-[#F5FAF9]"
@@ -100,20 +85,18 @@ export default function PricingPage() {
 
           {/* PRO Plan */}
           <div className="relative mt-2 flex flex-col rounded-2xl border-2 border-[#65AAA5] bg-white p-7 shadow-[0_8px_30px_rgba(57,155,152,0.07)] sm:p-8">
-
             {/* Recommended Badge */}
             <div className="absolute -top-4 right-6 flex items-center gap-1.5 rounded-full bg-[#399B98] px-4 py-1.5 text-xs font-bold text-white shadow-sm">
               <Sparkles size={13} />
               RECOMMENDED
             </div>
 
-            {/* Plan Header */}
             <div className="flex items-center justify-between gap-3">
               <h2 className="text-xl font-bold text-[#17202D]">
                 MentorLagbe PRO
               </h2>
 
-              <span className="whitespace-nowrap rounded-full bg-[#FFF5E5] px-3 py-1 text-xs font-medium text-[#B58A45]">
+              <span className="rounded-full bg-[#FFF5E5] px-3 py-1 text-xs font-medium whitespace-nowrap text-[#B58A45]">
                 PRO Badge
               </span>
             </div>
@@ -126,20 +109,14 @@ export default function PricingPage() {
             {/* Price */}
             <div className="mt-5 flex flex-wrap items-baseline gap-x-3 gap-y-1">
               <div>
-                <span className="text-4xl font-bold text-[#399B98]">
-                  $15
-                </span>
-                <p className="mt-0.5 text-xs text-[#858B94]">
-                  /mo for Tutors
-                </p>
+                <span className="text-4xl font-bold text-[#399B98]">$15</span>
+                <p className="mt-0.5 text-xs text-[#858B94]">/mo for Tutors</p>
               </div>
 
               <span className="text-sm text-[#9CA3AF]">or</span>
 
               <div>
-                <span className="text-2xl font-bold text-[#17202D]">
-                  $10
-                </span>
+                <span className="text-2xl font-bold text-[#17202D]">$10</span>
                 <p className="mt-0.5 text-xs text-[#858B94]">
                   /mo for Students
                 </p>
@@ -168,7 +145,7 @@ export default function PricingPage() {
             </ul>
 
             {/* Button */}
-            <div className="mt-10 border-t border-gray-100 pt-6">
+            <div className="mt-8 border-t border-gray-100 pt-5">
               <Link
                 href="/sign-up?plan=pro"
                 className="flex h-11 w-full items-center justify-center gap-2 rounded-xl bg-[#399B98] text-sm font-semibold text-white transition hover:bg-[#2D8582]"
@@ -178,8 +155,8 @@ export default function PricingPage() {
               </Link>
             </div>
           </div>
-        </section>
+        </div>
       </div>
-    </main>
-  );
+    </section>
+  )
 }

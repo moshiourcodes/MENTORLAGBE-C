@@ -6,6 +6,10 @@ import CTA from "@/components/CTA";
 import TopCategories from "@/components/TopCategories";
 import Review from "@/components/review";
 import Footer from "@/components/Footer";
+import FeaturedTuitions from "./tuitions/FeaturedTuitions";
+
+
+
 
 
 export default function Home() {
@@ -13,6 +17,7 @@ export default function Home() {
     <main className="min-h-screen w-full bg-white">
     
       <Hero />
+     <FeaturedTuitions></FeaturedTuitions>
   <PricingPage></PricingPage>
   <HowItWorks></HowItWorks>
   <TopCategories></TopCategories>

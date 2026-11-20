@@ -1,12 +1,12 @@
 
 import Hero from "@/components/Hero";
-import PricingPage from "./pricing/page";
 import HowItWorks from "@/components/HowItWorks";
 import CTA from "@/components/CTA";
 import TopCategories from "@/components/TopCategories";
 import Review from "@/components/review";
 import Footer from "@/components/Footer";
 import FeaturedTuitions from "./tuitions/FeaturedTuitions";
+import PricingSection from "@/components/PricingSection";
 
 
 
@@ -18,7 +18,7 @@ export default function Home() {
     
       <Hero />
      <FeaturedTuitions></FeaturedTuitions>
-  <PricingPage></PricingPage>
+   <PricingSection></PricingSection>
   <HowItWorks></HowItWorks>
   <TopCategories></TopCategories>
   <Review></Review>

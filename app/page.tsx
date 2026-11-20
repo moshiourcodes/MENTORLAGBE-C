@@ -5,6 +5,7 @@ import HowItWorks from "@/components/HowItWorks";
 import CTA from "@/components/CTA";
 import TopCategories from "@/components/TopCategories";
 import Review from "@/components/review";
+import Footer from "@/components/Footer";
 
 
 export default function Home() {
@@ -17,6 +18,7 @@ export default function Home() {
   <TopCategories></TopCategories>
   <Review></Review>
   <CTA></CTA>
+  <Footer></Footer>
     </main>
     
   );

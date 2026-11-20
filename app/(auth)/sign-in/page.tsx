@@ -3,6 +3,7 @@
 import { useState } from "react"
 import type { FormEvent } from "react"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
 import { toast } from "sonner"
 
 import { authClient } from "@/lib/auth-client"
@@ -17,6 +18,7 @@ import {
 } from "lucide-react"
 
 export default function SignInPage() {
+  const router = useRouter()
   const [showPassword, setShowPassword] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
 
@@ -45,7 +47,6 @@ export default function SignInPage() {
         email,
         password,
         rememberMe: true,
-        callbackURL: "/",
       })
 
       if (error) {
@@ -65,6 +66,18 @@ export default function SignInPage() {
         description: "Welcome back to MentorLagbe!",
         duration: 3000,
       })
+
+      const role = (data?.user as { role?: string } | undefined)?.role
+
+      const dashboardPath =
+        role === "admin"
+          ? "/dashboard/admin"
+          : role === "tutor"
+            ? "/dashboard/tutor"
+            : "/dashboard/student"
+
+      router.replace(dashboardPath)
+      router.refresh()
     } catch (error) {
       console.error("Sign In Error:", error)
 

@@ -71,19 +71,19 @@ const platformStats = [
 
 export default function TopCategories() {
   return (
-    <section className="w-full bg-[#F8FBFB] px-4 py-16 sm:px-6 lg:px-8">
+    <section className="w-full bg-[#F8FBFB] px-4 py-16 sm:px-6 lg:px-8 dark:bg-[#0B1220]">
       <div className="mx-auto max-w-6xl">
         {/* Section Heading */}
         <div className="mb-8">
-          <span className="inline-flex items-center rounded-full border border-[#D5EAE7] bg-[#EAF6F5] px-3 py-1 text-[10px] font-semibold tracking-wide text-[#398985] uppercase">
+          <span className="inline-flex items-center rounded-full border border-[#D5EAE7] bg-[#EAF6F5] px-3 py-1 text-[10px] font-semibold tracking-wide text-[#398985] uppercase dark:border-[#399B98]/30 dark:bg-[#399B98]/15 dark:text-[#5FD3C9]">
             EXPLORE SUBJECTS
           </span>
 
-          <h2 className="mt-3 text-3xl font-bold tracking-tight text-[#17202D] sm:text-4xl">
+          <h2 className="mt-3 text-3xl font-bold tracking-tight text-[#17202D] sm:text-4xl dark:text-foreground">
             Popular Subjects
           </h2>
 
-          <p className="mt-3 max-w-2xl text-sm leading-6 text-[#6B7C83] sm:text-base">
+          <p className="mt-3 max-w-2xl text-sm leading-6 text-[#6B7C83] sm:text-base dark:text-slate-300">
             Explore popular academic subjects and connect with experienced
             tutors who can guide you toward your goals.
           </p>
@@ -98,17 +98,17 @@ export default function TopCategories() {
               <Link
                 key={category.name}
                 href={`/tuitions?subject=${encodeURIComponent(category.name)}`}
-                className="group flex min-h-29 flex-col items-center justify-center rounded-xl border border-[#E4EEEE] bg-white px-3 py-5 text-center shadow-[0_2px_10px_rgba(23,47,53,0.025)] transition-all duration-300 hover:-translate-y-1 hover:border-[#399B98]/40 hover:shadow-[0_8px_22px_rgba(57,155,152,0.09)]"
+                className="group flex min-h-29 flex-col items-center justify-center rounded-xl border border-[#E4EEEE] bg-white px-3 py-5 text-center shadow-[0_2px_10px_rgba(23,47,53,0.025)] transition-all duration-300 hover:-translate-y-1 hover:border-[#399B98]/40 hover:shadow-[0_8px_22px_rgba(57,155,152,0.09)] dark:border-[#1E2C42] dark:bg-[#111C2E]"
               >
-                <div className="mb-3 flex h-9 w-9 items-center justify-center rounded-lg bg-[#EAF6F5] text-[#399B98] transition-colors duration-300 group-hover:bg-[#399B98] group-hover:text-white">
+                <div className="mb-3 flex h-9 w-9 items-center justify-center rounded-lg bg-[#EAF6F5] text-[#399B98] transition-colors duration-300 group-hover:bg-[#399B98] group-hover:text-white dark:bg-[#399B98]/15 dark:text-[#5FD3C9]">
                   <Icon size={18} strokeWidth={1.8} />
                 </div>
 
-                <h3 className="text-xs font-semibold text-[#17202D] transition-colors group-hover:text-[#399B98] sm:text-sm">
+                <h3 className="text-xs font-semibold text-[#17202D] transition-colors group-hover:text-[#399B98] sm:text-sm dark:text-foreground dark:group-hover:text-[#5FD3C9]">
                   {category.name}
                 </h3>
 
-                <p className="mt-1 text-[10px] text-[#87989A]">
+                <p className="mt-1 text-[10px] text-[#87989A] dark:text-slate-400">
                   {category.description}
                 </p>
               </Link>
@@ -117,7 +117,7 @@ export default function TopCategories() {
         </div>
 
         {/* Platform Statistics */}
-        <div className="mt-14 rounded-2xl border border-[#E5EEEE] bg-white px-5 py-8 shadow-[0_4px_20px_rgba(23,47,53,0.035)] sm:px-8 sm:py-9">
+        <div className="mt-14 rounded-2xl border border-[#E5EEEE] bg-white px-5 py-8 shadow-[0_4px_20px_rgba(23,47,53,0.035)] sm:px-8 sm:py-9 dark:border-[#1E2C42] dark:bg-[#111C2E]">
           <div className="grid grid-cols-2 gap-y-9 sm:grid-cols-4 sm:gap-4">
             {platformStats.map((stat) => {
               const Icon = stat.icon
@@ -127,15 +127,15 @@ export default function TopCategories() {
                   key={stat.label}
                   className="flex flex-col items-center text-center"
                 >
-                  <div className="mb-3 flex h-9 w-9 items-center justify-center rounded-lg bg-[#EAF6F5] text-[#399B98]">
+                  <div className="mb-3 flex h-9 w-9 items-center justify-center rounded-lg bg-[#EAF6F5] text-[#399B98] dark:bg-[#399B98]/15 dark:text-[#5FD3C9]">
                     <Icon size={18} strokeWidth={1.8} />
                   </div>
 
-                  <h3 className="text-xl font-bold tracking-tight text-[#17202D] sm:text-2xl">
+                  <h3 className="text-xl font-bold tracking-tight text-[#17202D] sm:text-2xl dark:text-foreground">
                     {stat.value}
                   </h3>
 
-                  <p className="mt-1 text-[11px] text-[#87989A] sm:text-xs">
+                  <p className="mt-1 text-[11px] text-[#87989A] sm:text-xs dark:text-slate-400">
                     {stat.label}
                   </p>
                 </div>

@@ -47,73 +47,83 @@
     --radius-4xl: calc(var(--radius) * 2.6);
 }
 
+/* ── Light theme ───────────────────────────────────────────────
+   White / very-light-gray surfaces, deep slate text, white cards,
+   light gray borders, teal primary, light inputs.               */
 :root {
-    --background: oklch(1 0 0);
-    --foreground: oklch(0.145 0 0);
-    --card: oklch(1 0 0);
-    --card-foreground: oklch(0.145 0 0);
-    --popover: oklch(1 0 0);
-    --popover-foreground: oklch(0.145 0 0);
-    --primary: oklch(0.205 0 0);
-    --primary-foreground: oklch(0.985 0 0);
-    --secondary: oklch(0.97 0 0);
-    --secondary-foreground: oklch(0.205 0 0);
-    --muted: oklch(0.97 0 0);
-    --muted-foreground: oklch(0.556 0 0);
-    --accent: oklch(0.97 0 0);
-    --accent-foreground: oklch(0.205 0 0);
-    --destructive: oklch(0.577 0.245 27.325);
-    --border: oklch(0.922 0 0);
-    --input: oklch(0.922 0 0);
-    --ring: oklch(0.708 0 0);
+    color-scheme: light;
+
+    --background: #f7fafa;
+    --foreground: #17202d;
+    --card: #ffffff;
+    --card-foreground: #17202d;
+    --popover: #ffffff;
+    --popover-foreground: #17202d;
+    --primary: #399b98;
+    --primary-foreground: #ffffff;
+    --secondary: #eaf6f5;
+    --secondary-foreground: #17202d;
+    --muted: #f1f5f5;
+    --muted-foreground: #64748b;
+    --accent: #e7f4f2;
+    --accent-foreground: #0c6b66;
+    --destructive: #d45b5b;
+    --border: #e3e9e9;
+    --input: #dce4e4;
+    --ring: #399b98;
     --chart-1: oklch(0.87 0 0);
     --chart-2: oklch(0.556 0 0);
     --chart-3: oklch(0.439 0 0);
     --chart-4: oklch(0.371 0 0);
     --chart-5: oklch(0.269 0 0);
     --radius: 0.625rem;
-    --sidebar: oklch(0.985 0 0);
-    --sidebar-foreground: oklch(0.145 0 0);
-    --sidebar-primary: oklch(0.205 0 0);
-    --sidebar-primary-foreground: oklch(0.985 0 0);
-    --sidebar-accent: oklch(0.97 0 0);
-    --sidebar-accent-foreground: oklch(0.205 0 0);
-    --sidebar-border: oklch(0.922 0 0);
-    --sidebar-ring: oklch(0.708 0 0);
+    --sidebar: #ffffff;
+    --sidebar-foreground: #17202d;
+    --sidebar-primary: #399b98;
+    --sidebar-primary-foreground: #ffffff;
+    --sidebar-accent: #eaf6f5;
+    --sidebar-accent-foreground: #17202d;
+    --sidebar-border: #e3e9e9;
+    --sidebar-ring: #399b98;
 }
 
+/* ── Dark theme ────────────────────────────────────────────────
+   Deep navy / dark-slate surfaces, light text, dark slate cards,
+   subtle dark borders, teal primary, dark inputs.               */
 .dark {
-    --background: oklch(0.145 0 0);
-    --foreground: oklch(0.985 0 0);
-    --card: oklch(0.205 0 0);
-    --card-foreground: oklch(0.985 0 0);
-    --popover: oklch(0.205 0 0);
-    --popover-foreground: oklch(0.985 0 0);
-    --primary: oklch(0.922 0 0);
-    --primary-foreground: oklch(0.205 0 0);
-    --secondary: oklch(0.269 0 0);
-    --secondary-foreground: oklch(0.985 0 0);
-    --muted: oklch(0.269 0 0);
-    --muted-foreground: oklch(0.708 0 0);
-    --accent: oklch(0.269 0 0);
-    --accent-foreground: oklch(0.985 0 0);
-    --destructive: oklch(0.704 0.191 22.216);
-    --border: oklch(1 0 0 / 10%);
-    --input: oklch(1 0 0 / 15%);
-    --ring: oklch(0.556 0 0);
+    color-scheme: dark;
+
+    --background: #0b1220;
+    --foreground: #e6ebf2;
+    --card: #111c2e;
+    --card-foreground: #e6ebf2;
+    --popover: #111c2e;
+    --popover-foreground: #e6ebf2;
+    --primary: #399b98;
+    --primary-foreground: #ffffff;
+    --secondary: #16233a;
+    --secondary-foreground: #e6ebf2;
+    --muted: #16233a;
+    --muted-foreground: #93a4bc;
+    --accent: #12302f;
+    --accent-foreground: #8ad4ce;
+    --destructive: #e06a6a;
+    --border: #1e2c42;
+    --input: #24344d;
+    --ring: #4fb3af;
     --chart-1: oklch(0.87 0 0);
     --chart-2: oklch(0.556 0 0);
     --chart-3: oklch(0.439 0 0);
     --chart-4: oklch(0.371 0 0);
     --chart-5: oklch(0.269 0 0);
-    --sidebar: oklch(0.205 0 0);
-    --sidebar-foreground: oklch(0.985 0 0);
-    --sidebar-primary: oklch(0.488 0.243 264.376);
-    --sidebar-primary-foreground: oklch(0.985 0 0);
-    --sidebar-accent: oklch(0.269 0 0);
-    --sidebar-accent-foreground: oklch(0.985 0 0);
-    --sidebar-border: oklch(1 0 0 / 10%);
-    --sidebar-ring: oklch(0.556 0 0);
+    --sidebar: #0e1726;
+    --sidebar-foreground: #e6ebf2;
+    --sidebar-primary: #399b98;
+    --sidebar-primary-foreground: #ffffff;
+    --sidebar-accent: #16233a;
+    --sidebar-accent-foreground: #e6ebf2;
+    --sidebar-border: #1e2c42;
+    --sidebar-ring: #4fb3af;
 }
 
 @layer base {
@@ -122,6 +132,43 @@
     }
   body {
     @apply bg-background text-foreground;
+    transition: background-color 0.25s ease, color 0.25s ease;
+    }
+  /* Smooth app-wide theme switch. `:where()` keeps specificity at zero so
+     every existing `transition-*` utility still wins over this rule. */
+  body
+    :where(
+      header,
+      main,
+      footer,
+      section,
+      aside,
+      nav,
+      article,
+      div,
+      span,
+      p,
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6,
+      a,
+      button,
+      input,
+      textarea,
+      select,
+      li,
+      td,
+      th,
+      label,
+      pre,
+      code
+    ) {
+    transition-property: background-color, border-color, color, fill, stroke;
+    transition-duration: 0.22s;
+    transition-timing-function: ease;
     }
   html {
     @apply font-sans;

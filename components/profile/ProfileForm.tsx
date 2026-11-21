@@ -146,7 +146,7 @@ export function ProfileForm({
         {/* Profile Photo */}
         <div className="flex flex-col gap-5 border-b border-gray-100 pb-6 sm:flex-row sm:items-center dark:border-border">
           <div className="relative mx-auto sm:mx-0">
-            <div className="flex h-24 w-24 items-center justify-center overflow-hidden rounded-full border-[3px] border-[#C9E9E5] bg-[#399B98] text-[34px] font-medium text-white shadow-sm">
+            <div className="flex h-24 w-24 items-center justify-center overflow-hidden rounded-full border-[3px] border-[#C9E9E5] bg-[#399B98] text-[34px] font-medium text-white shadow-sm dark:border-[#399B98]/30">
               {image ? (
                 <Image
                   width={20}
@@ -190,9 +190,9 @@ export function ProfileForm({
             <button
               type="button"
               onClick={() => fileInputRef.current?.click()}
-              className="mt-3 inline-flex h-9 items-center justify-center gap-2 rounded-lg border border-gray-200 bg-[#FAFCFC] px-4 text-xs font-medium text-[#52666B] transition hover:border-[#399B98] hover:bg-[#EAF6F5] dark:border-border dark:bg-muted/40 dark:text-foreground"
+              className="mt-3 inline-flex h-9 items-center justify-center gap-2 rounded-lg border border-gray-200 bg-[#FAFCFC] px-4 text-xs font-medium text-[#52666B] transition hover:border-[#399B98] hover:bg-[#EAF6F5] dark:border-border dark:bg-muted/40 dark:text-foreground dark:hover:bg-[#399B98]/15"
             >
-              <Camera size={14} className="text-[#399B98]" />
+              <Camera size={14} className="text-[#399B98] dark:text-[#5FD3C9]" />
               Upload New Avatar
             </button>
           </div>
@@ -219,7 +219,7 @@ export function ProfileForm({
             <span
               className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold capitalize ${
                 plan.toLowerCase() === "pro"
-                  ? "border border-[#F4DCA8] bg-[#FFF5E2] text-[#B7791F]"
+                  ? "border border-[#F4DCA8] bg-[#FFF5E2] text-[#B7791F] dark:border-[#C98A2B]/40 dark:bg-[#C98A2B]/15 dark:text-[#F0C57E]"
                   : "border border-gray-200 bg-white text-[#64748B] dark:border-border dark:bg-muted/40 dark:text-muted-foreground"
               }`}
             >
@@ -239,7 +239,7 @@ export function ProfileForm({
           </label>
 
           <div className="flex h-11 items-center rounded-lg border border-gray-200 bg-[#FAFBFC] px-3 transition focus-within:border-[#399B98] focus-within:ring-2 focus-within:ring-[#399B98]/10 dark:border-border dark:bg-muted/40">
-            <UserRound size={16} className="shrink-0 text-[#A0AAAE]" />
+            <UserRound size={16} className="shrink-0 text-[#A0AAAE] dark:text-slate-400" />
 
             <input
               id="name"
@@ -249,7 +249,7 @@ export function ProfileForm({
               value={name}
               onChange={(event) => setName(event.target.value)}
               placeholder="Enter your full name"
-              className="h-full w-full bg-transparent px-3 text-[13px] text-[#374151] outline-none placeholder:text-[#A0AAAE] dark:text-foreground"
+              className="h-full w-full bg-transparent px-3 text-[13px] text-[#374151] outline-none placeholder:text-[#A0AAAE] dark:text-foreground dark:placeholder:text-slate-400"
             />
           </div>
         </div>
@@ -261,20 +261,20 @@ export function ProfileForm({
             className="mb-2 block text-[13px] font-semibold text-[#263C43] dark:text-foreground"
           >
             Email Address{" "}
-            <span className="text-xs font-normal text-[#A0AAAE]">
+            <span className="text-xs font-normal text-[#A0AAAE] dark:text-slate-400">
               (Non-editable)
             </span>
           </label>
 
           <div className="flex h-11 items-center rounded-lg border border-gray-200 bg-[#F1F4F6] px-3 dark:border-border dark:bg-muted/40">
-            <Mail size={16} className="shrink-0 text-[#A0AAAE]" />
+            <Mail size={16} className="shrink-0 text-[#A0AAAE] dark:text-slate-400" />
 
             <input
               id="email"
               type="email"
               value={profileUser.email || ""}
               readOnly
-              className="h-full w-full cursor-not-allowed bg-transparent px-3 text-[13px] text-[#87949A] outline-none"
+              className="h-full w-full cursor-not-allowed bg-transparent px-3 text-[13px] text-[#87949A] outline-none dark:text-slate-400"
             />
           </div>
         </div>
@@ -289,7 +289,7 @@ export function ProfileForm({
           </label>
 
           <div className="flex h-11 items-center rounded-lg border border-gray-200 bg-[#FAFBFC] px-3 transition focus-within:border-[#399B98] focus-within:ring-2 focus-within:ring-[#399B98]/10 dark:border-border dark:bg-muted/40">
-            <Phone size={16} className="shrink-0 text-[#A0AAAE]" />
+            <Phone size={16} className="shrink-0 text-[#A0AAAE] dark:text-slate-400" />
 
             <input
               id="phone"
@@ -298,7 +298,7 @@ export function ProfileForm({
               value={phone}
               onChange={(event) => setPhone(event.target.value)}
               placeholder="+880-1700-000002"
-              className="h-full w-full bg-transparent px-3 text-[13px] text-[#374151] outline-none placeholder:text-[#A0AAAE] dark:text-foreground"
+              className="h-full w-full bg-transparent px-3 text-[13px] text-[#374151] outline-none placeholder:text-[#A0AAAE] dark:text-foreground dark:placeholder:text-slate-400"
             />
           </div>
         </div>
@@ -320,10 +320,10 @@ export function ProfileForm({
             value={bio}
             onChange={(event) => setBio(event.target.value)}
             placeholder="Write about your academic background, teaching experience, or learning goals..."
-            className="w-full resize-y rounded-lg border border-gray-200 bg-[#FAFBFC] px-3.5 py-3 text-[13px] leading-6 text-[#374151] outline-none transition placeholder:text-[#A0AAAE] focus:border-[#399B98] focus:ring-2 focus:ring-[#399B98]/10 dark:border-border dark:bg-muted/40 dark:text-foreground"
+            className="w-full resize-y rounded-lg border border-gray-200 bg-[#FAFBFC] px-3.5 py-3 text-[13px] leading-6 text-[#374151] outline-none transition placeholder:text-[#A0AAAE] focus:border-[#399B98] focus:ring-2 focus:ring-[#399B98]/10 dark:border-border dark:bg-muted/40 dark:text-foreground dark:placeholder:text-slate-400"
           />
 
-          <p className="mt-1 text-right text-[10px] text-[#A0AAAE]">
+          <p className="mt-1 text-right text-[10px] text-[#A0AAAE] dark:text-slate-400">
             {bio.length}/500
           </p>
         </div>

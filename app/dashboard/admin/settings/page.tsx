@@ -42,7 +42,7 @@ export default async function AdminSettingsPage() {
           <div className="rounded-xl bg-muted/40 px-4 py-3">
             <dt className="text-xs text-muted-foreground">Account role</dt>
             <dd className="mt-1 inline-flex items-center gap-1.5 text-sm font-semibold text-foreground capitalize">
-              <ShieldCheck size={15} className="text-[#7C5CD6]" />
+              <ShieldCheck size={15} className="text-[#7C5CD6] dark:text-[#B9A6F0]" />
               {user.role}
             </dd>
           </div>
@@ -50,7 +50,7 @@ export default async function AdminSettingsPage() {
           <div className="rounded-xl bg-muted/40 px-4 py-3">
             <dt className="text-xs text-muted-foreground">Subscription plan</dt>
             <dd className="mt-1 inline-flex items-center gap-1.5 text-sm font-semibold text-foreground uppercase">
-              <Crown size={15} className="text-[#C98A2B]" />
+              <Crown size={15} className="text-[#C98A2B] dark:text-[#F0C57E]" />
               {user.plan}
             </dd>
           </div>
@@ -95,7 +95,7 @@ export default async function AdminSettingsPage() {
 
       <Link
         href="/dashboard/admin"
-        className="inline-flex text-xs font-semibold text-[#399B98] hover:underline"
+        className="inline-flex text-xs font-semibold text-[#399B98] hover:underline dark:text-[#5FD3C9]"
       >
         ← Back to overview
       </Link>

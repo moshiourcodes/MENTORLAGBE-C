@@ -119,7 +119,7 @@ export default async function StudentDashboardPage() {
 
           <Link
             href="/dashboard/student/my-applications"
-            className="text-xs font-semibold text-[#399B98] hover:underline"
+            className="text-xs font-semibold text-[#399B98] hover:underline dark:text-[#5FD3C9]"
           >
             View all
           </Link>

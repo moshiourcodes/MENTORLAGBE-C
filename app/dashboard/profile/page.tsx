@@ -32,7 +32,7 @@ export default function DashboardProfilePage() {
     return (
       <div className="flex min-h-60 items-center justify-center rounded-2xl border border-border bg-card">
         <div className="flex items-center gap-2 text-sm text-muted-foreground">
-          <LoaderCircle size={18} className="animate-spin text-[#399B98]" />
+          <LoaderCircle size={18} className="animate-spin text-[#399B98] dark:text-[#5FD3C9]" />
           Loading profile...
         </div>
       </div>

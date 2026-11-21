@@ -94,24 +94,24 @@ export default function SignInPage() {
   }
 
   return (
-    <main className="flex min-h-[calc(100vh-68px)] items-center justify-center bg-[#F7FAFA] px-4 py-12">
-      <div className="w-full max-w-115 rounded-2xl border border-gray-100 bg-white p-7 shadow-[0_10px_40px_rgba(0,0,0,0.05)] sm:p-9">
+    <main className="flex min-h-[calc(100vh-68px)] items-center justify-center bg-[#F7FAFA] px-4 py-12 dark:bg-[#0B1220]">
+      <div className="w-full max-w-115 rounded-2xl border border-gray-100 bg-white p-7 shadow-[0_10px_40px_rgba(0,0,0,0.05)] sm:p-9 dark:border-[#1E2C42] dark:bg-[#111C2E]">
         {/* Logo */}
         <Link href="/" className="mb-7 flex items-center justify-center gap-2">
           <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#399B98]">
             <GraduationCap size={23} className="text-white" />
           </div>
 
-          <span className="text-xl font-bold text-[#17202D]">
-            Mentor<span className="text-[#399B98]">Lagbe</span>
+          <span className="text-xl font-bold text-[#17202D] dark:text-foreground">
+            Mentor<span className="text-[#399B98] dark:text-[#5FD3C9]">Lagbe</span>
           </span>
         </Link>
 
         {/* Heading */}
         <div className="mb-7 text-center">
-          <h1 className="text-2xl font-bold text-[#17202D]">Welcome Back!</h1>
+          <h1 className="text-2xl font-bold text-[#17202D] dark:text-foreground">Welcome Back!</h1>
 
-          <p className="mt-2 text-sm text-[#6B7280]">
+          <p className="mt-2 text-sm text-[#6B7280] dark:text-slate-300">
             Sign in to continue to your MentorLagbe account.
           </p>
         </div>
@@ -122,13 +122,13 @@ export default function SignInPage() {
           <div>
             <label
               htmlFor="email"
-              className="mb-2 block text-sm font-semibold text-[#374151]"
+              className="mb-2 block text-sm font-semibold text-[#374151] dark:text-slate-200"
             >
               Email Address
             </label>
 
-            <div className="flex h-12 items-center rounded-lg border border-gray-200 bg-white px-3 transition focus-within:border-[#399B98] focus-within:ring-2 focus-within:ring-[#399B98]/10">
-              <Mail size={18} className="shrink-0 text-[#9CA3AF]" />
+            <div className="flex h-12 items-center rounded-lg border border-gray-200 bg-white px-3 transition focus-within:border-[#399B98] focus-within:ring-2 focus-within:ring-[#399B98]/10 dark:border-[#1E2C42] dark:bg-[#111C2E]">
+              <Mail size={18} className="shrink-0 text-[#9CA3AF] dark:text-slate-400" />
 
               <input
                 id="email"
@@ -137,7 +137,7 @@ export default function SignInPage() {
                 placeholder="example@gmail.com"
                 required
                 autoComplete="email"
-                className="h-full w-full bg-transparent px-3 text-sm font-medium text-[#17202D] outline-none placeholder:font-normal placeholder:text-[#9CA3AF]"
+                className="h-full w-full bg-transparent px-3 text-sm font-medium text-[#17202D] outline-none placeholder:font-normal placeholder:text-[#9CA3AF] dark:text-foreground dark:placeholder:text-slate-400"
               />
             </div>
           </div>
@@ -146,13 +146,13 @@ export default function SignInPage() {
           <div>
             <label
               htmlFor="password"
-              className="mb-2 block text-sm font-semibold text-[#374151]"
+              className="mb-2 block text-sm font-semibold text-[#374151] dark:text-slate-200"
             >
               Password
             </label>
 
-            <div className="flex h-12 items-center rounded-lg border border-gray-200 bg-white px-3 transition focus-within:border-[#399B98] focus-within:ring-2 focus-within:ring-[#399B98]/10">
-              <LockKeyhole size={18} className="shrink-0 text-[#9CA3AF]" />
+            <div className="flex h-12 items-center rounded-lg border border-gray-200 bg-white px-3 transition focus-within:border-[#399B98] focus-within:ring-2 focus-within:ring-[#399B98]/10 dark:border-[#1E2C42] dark:bg-[#111C2E]">
+              <LockKeyhole size={18} className="shrink-0 text-[#9CA3AF] dark:text-slate-400" />
 
               <input
                 id="password"
@@ -161,13 +161,13 @@ export default function SignInPage() {
                 placeholder="Enter your password"
                 required
                 autoComplete="current-password"
-                className="h-full w-full bg-transparent px-3 text-sm font-medium text-[#17202D] outline-none placeholder:font-normal placeholder:text-[#9CA3AF]"
+                className="h-full w-full bg-transparent px-3 text-sm font-medium text-[#17202D] outline-none placeholder:font-normal placeholder:text-[#9CA3AF] dark:text-foreground dark:placeholder:text-slate-400"
               />
 
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="shrink-0 text-[#9CA3AF] transition hover:text-[#399B98]"
+                className="shrink-0 text-[#9CA3AF] transition hover:text-[#399B98] dark:text-slate-400 dark:hover:text-[#5FD3C9]"
                 aria-label={showPassword ? "Hide password" : "Show password"}
               >
                 {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
@@ -193,21 +193,21 @@ export default function SignInPage() {
         </form>
 
         {/* Sign Up Toggle */}
-        <p className="mt-7 text-center text-sm text-[#6B7280]">
+        <p className="mt-7 text-center text-sm text-[#6B7280] dark:text-slate-300">
           Don&apos;t have an account?{" "}
           <Link
             href="/sign-up"
-            className="font-semibold text-[#399B98] hover:underline"
+            className="font-semibold text-[#399B98] hover:underline dark:text-[#5FD3C9]"
           >
             Sign Up
           </Link>
         </p>
 
         {/* Back to Home */}
-        <div className="mt-6 border-t border-gray-100 pt-5 text-center">
+        <div className="mt-6 border-t border-gray-100 pt-5 text-center dark:border-[#1E2C42]">
           <Link
             href="/"
-            className="text-xs text-[#6B7280] hover:text-[#399B98]"
+            className="text-xs text-[#6B7280] hover:text-[#399B98] dark:text-slate-300 dark:hover:text-[#5FD3C9]"
           >
             ← Back to Home
           </Link>

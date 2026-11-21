@@ -14,7 +14,7 @@ import PricingSection from "@/components/PricingSection";
 
 export default function Home() {
   return (
-    <main className="min-h-screen w-full bg-white">
+    <main className="min-h-screen w-full bg-white dark:bg-[#0B1220]">
     
       <Hero />
      <FeaturedTuitions></FeaturedTuitions>

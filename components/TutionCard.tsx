@@ -39,7 +39,7 @@ export default function TuitionCard({ tuition }: TuitionCardProps) {
     <article className="group rounded-2xl border border-slate-200 bg-white p-5 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg dark:border-slate-800 dark:bg-card">
 
       {/* Tuition Image */}
-      <div className="relative h-[226px] w-full overflow-hidden rounded-xl bg-slate-100">
+      <div className="relative h-56.5 w-full overflow-hidden rounded-xl bg-slate-100 dark:bg-slate-800">
 
         {tuition.bannerImage ? (
           <Image
@@ -76,13 +76,13 @@ export default function TuitionCard({ tuition }: TuitionCardProps) {
           onClick={() => setIsBookmarked(!isBookmarked)}
           aria-label={isBookmarked ? "Remove bookmark" : "Bookmark tuition"}
           aria-pressed={isBookmarked}
-          className="absolute right-3 top-3 flex h-9 w-9 items-center justify-center rounded-full bg-white text-slate-700 shadow-sm transition hover:bg-slate-100"
+          className="absolute right-3 top-3 flex h-9 w-9 items-center justify-center rounded-full bg-white text-slate-700 shadow-sm transition hover:bg-slate-100 dark:bg-[#111C2E] dark:text-slate-200 dark:hover:bg-slate-800"
         >
           <Bookmark
             size={18}
             className={
               isBookmarked
-                ? "fill-[#399B98] text-[#399B98]"
+                ? "fill-[#399B98] text-[#399B98] dark:text-[#5FD3C9]"
                 : ""
             }
           />
@@ -94,11 +94,11 @@ export default function TuitionCard({ tuition }: TuitionCardProps) {
 
         {/* Subject and Class */}
         <div className="mb-3 flex items-center justify-between gap-2">
-          <span className="max-w-[65%] truncate rounded-md border border-[#C8EBE7] bg-[#EDF8F6] px-2.5 py-1 text-xs font-medium text-[#16877F]">
+          <span className="max-w-[65%] truncate rounded-md border border-[#C8EBE7] bg-[#EDF8F6] px-2.5 py-1 text-xs font-medium text-[#16877F] dark:border-[#399B98]/30 dark:bg-[#399B98]/15 dark:text-[#5FD3C9]">
             {tuition.subject}
           </span>
 
-          <span className="shrink-0 text-xs text-slate-500">
+          <span className="shrink-0 text-xs text-slate-500 dark:text-slate-400">
             Class {tuition.classLevel}
           </span>
         </div>
@@ -118,7 +118,7 @@ export default function TuitionCard({ tuition }: TuitionCardProps) {
             <UserRound size={14} />
           </span>
 
-          <span className="max-w-[120px] truncate">
+          <span className="max-w-30 truncate">
             {tuition.tutorName}
           </span>
 
@@ -126,7 +126,7 @@ export default function TuitionCard({ tuition }: TuitionCardProps) {
 
           <CalendarDays
             size={14}
-            className="shrink-0 text-[#399B98]"
+            className="shrink-0 text-[#399B98] dark:text-[#5FD3C9]"
           />
 
           <span className="whitespace-nowrap">
@@ -147,7 +147,7 @@ export default function TuitionCard({ tuition }: TuitionCardProps) {
 
             <p className="text-xl font-bold tracking-tight text-[#17202D] dark:text-foreground">
               ৳ {tuition.monthlyFee.toLocaleString("en-BD")}
-              <span className="text-xs font-normal text-slate-500">
+              <span className="text-xs font-normal text-slate-500 dark:text-slate-400">
                 /mo
               </span>
             </p>

@@ -39,9 +39,9 @@ export default function ProfilePage() {
 
   if (isPending || !session || !profileUser) {
     return (
-      <main className="flex min-h-screen items-center justify-center bg-[#F7F9FA]">
-        <div className="flex items-center gap-2 text-sm text-[#6B7C83]">
-          <LoaderCircle size={20} className="animate-spin text-[#399B98]" />
+      <main className="flex min-h-screen items-center justify-center bg-[#F7F9FA] dark:bg-[#0B1220]">
+        <div className="flex items-center gap-2 text-sm text-[#6B7C83] dark:text-slate-300">
+          <LoaderCircle size={20} className="animate-spin text-[#399B98] dark:text-[#5FD3C9]" />
           Loading account settings...
         </div>
       </main>

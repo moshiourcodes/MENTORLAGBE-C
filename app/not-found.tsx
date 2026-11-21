@@ -1,3 +1,4 @@
+"use client";
 
 import Link from "next/link";
 import {
@@ -52,7 +53,7 @@ export default function NotFound() {
           <button
             type="button"
             onClick={() => window.history.back()}
-            className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-xl border border-[#DCE5E9] bg-white px-7 text-sm font-semibold text-[#475569] transition hover:bg-[#F1F7F6] sm:w-auto dark:border-border dark:bg-card dark:text-foreground"
+            className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-xl border border-[#DCE5E9] bg-white px-7 text-sm font-semibold text-[#475569] transition hover:bg-[#F1F7F6] sm:w-auto dark:border-border dark:bg-card dark:text-foreground dark:hover:bg-[#399B98]/15"
           >
             <ArrowLeft size={17} />
             Go Back
@@ -67,7 +68,7 @@ export default function NotFound() {
           </div>
 
           <span className="text-sm font-bold text-[#17202D] dark:text-foreground">
-            Mentor<span className="text-[#399B98]">Lagbe</span>
+            Mentor<span className="text-[#399B98] dark:text-[#5FD3C9]">Lagbe</span>
           </span>
         </div>
 

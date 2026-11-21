@@ -53,7 +53,7 @@ export function QuickAction({
 
       <ArrowRight
         size={18}
-        className="shrink-0 text-muted-foreground transition group-hover:translate-x-0.5 group-hover:text-[#399B98]"
+        className="shrink-0 text-muted-foreground transition group-hover:translate-x-0.5 group-hover:text-[#399B98] dark:group-hover:text-[#5FD3C9]"
       />
     </Link>
   )

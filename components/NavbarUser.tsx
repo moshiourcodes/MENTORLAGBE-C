@@ -17,7 +17,7 @@ export default function NavbarUser() {
 
   if (isPending) {
     return (
-      <div className="h-9 w-24 animate-pulse rounded-full bg-gray-100" />
+      <div className="h-9 w-24 animate-pulse rounded-full bg-gray-100 dark:bg-slate-800" />
     );
   }
 
@@ -32,7 +32,7 @@ export default function NavbarUser() {
   const image = user.image;
 
   return (
-    <div className="flex items-center gap-2.5 border-l border-gray-100 pl-4">
+    <div className="flex items-center gap-2.5 border-l border-gray-100 pl-4 dark:border-[#1E2C42]">
       {/* User Avatar */}
       <div className="flex h-9 w-9 shrink-0 items-center justify-center overflow-hidden rounded-full border border-[#399B98]/20 bg-[#399B98] text-xs font-semibold text-white">
         {image ? (
@@ -48,7 +48,7 @@ export default function NavbarUser() {
 
       {/* User Name */}
       <div className="hidden sm:block">
-        <p className="max-w-[130px] truncate text-xs font-medium text-[#17202D]">
+        <p className="max-w-[130px] truncate text-xs font-medium text-[#17202D] dark:text-foreground">
           {name}
         </p>
       </div>

@@ -96,7 +96,7 @@ export default async function MyApplicationsPage() {
                           />
                           <button
                             type="submit"
-                            className="rounded-lg border border-[#F5D5D5] px-3 py-1.5 text-xs font-semibold text-[#C24B4B] transition hover:bg-[#FDECEC] dark:border-[#D45B5B]/30 dark:hover:bg-[#D45B5B]/10"
+                            className="rounded-lg border border-[#F5D5D5] px-3 py-1.5 text-xs font-semibold text-[#C24B4B] transition hover:bg-[#FDECEC] dark:border-[#D45B5B]/30 dark:hover:bg-[#D45B5B]/10 dark:text-[#F0A3A3]"
                           >
                             Cancel
                           </button>
@@ -115,7 +115,7 @@ export default async function MyApplicationsPage() {
 
       <Link
         href="/dashboard/student"
-        className="inline-flex text-xs font-semibold text-[#399B98] hover:underline"
+        className="inline-flex text-xs font-semibold text-[#399B98] hover:underline dark:text-[#5FD3C9]"
       >
         ← Back to overview
       </Link>

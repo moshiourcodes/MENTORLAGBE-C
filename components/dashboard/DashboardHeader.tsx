@@ -6,15 +6,13 @@ import {
   ChevronDown,
   LayoutDashboard,
   LogOut,
-  Moon,
-  Sun,
   UserRound,
 } from "lucide-react"
 import { toast } from "sonner"
 
 import { authClient } from "@/lib/auth-client"
 import type { DashboardUser } from "@/lib/dashboard"
-import { useTheme } from "@/components/theme-provider"
+import { ThemeToggle } from "@/components/ThemeToggle"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import {
   DropdownMenu,
@@ -49,9 +47,7 @@ function getInitials(name: string) {
 
 export function DashboardHeader({ user }: { user: DashboardUser }) {
   const router = useRouter()
-  const { resolvedTheme, setTheme } = useTheme()
 
-  const isDark = resolvedTheme === "dark"
   const firstName = user.name.split(/\s+/)[0] || user.name
 
   const handleSignOut = async () => {
@@ -83,14 +79,7 @@ export function DashboardHeader({ user }: { user: DashboardUser }) {
       </div>
 
       <div className="flex items-center gap-2 sm:gap-3">
-        <button
-          type="button"
-          onClick={() => setTheme(isDark ? "light" : "dark")}
-          aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
-          className="flex h-9 w-9 items-center justify-center rounded-lg border border-border bg-background text-muted-foreground transition hover:bg-muted hover:text-foreground"
-        >
-          {isDark ? <Sun size={17} /> : <Moon size={17} />}
-        </button>
+        <ThemeToggle size="sm" />
 
         <div className="hidden h-8 w-px bg-border sm:block" />
 

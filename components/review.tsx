@@ -36,20 +36,20 @@ const reviews = [
 
 export default function Review() {
   return (
-    <section className="w-full bg-[#F8FBFB] px-4 py-16 sm:px-6 lg:px-8">
+    <section className="w-full bg-[#F8FBFB] px-4 py-16 sm:px-6 lg:px-8 dark:bg-[#0B1220]">
       <div className="mx-auto max-w-6xl">
 
         {/* Section Heading */}
         <div className="mx-auto mb-9 max-w-2xl text-center">
-          <span className="inline-flex items-center rounded-full border border-[#D5EBE8] bg-[#EAF6F5] px-3 py-1 text-[10px] font-semibold uppercase tracking-wide text-[#398985]">
+          <span className="inline-flex items-center rounded-full border border-[#D5EBE8] bg-[#EAF6F5] px-3 py-1 text-[10px] font-semibold uppercase tracking-wide text-[#398985] dark:border-[#399B98]/30 dark:bg-[#399B98]/15 dark:text-[#5FD3C9]">
             STUDENT FEEDBACK
           </span>
 
-          <h2 className="mt-4 text-2xl font-bold tracking-tight text-[#17202D] sm:text-3xl">
+          <h2 className="mt-4 text-2xl font-bold tracking-tight text-[#17202D] sm:text-3xl dark:text-foreground">
             Trusted by Students Across Bangladesh
           </h2>
 
-          <p className="mx-auto mt-3 max-w-xl text-sm leading-6 text-[#7B898F] sm:text-[15px]">
+          <p className="mx-auto mt-3 max-w-xl text-sm leading-6 text-[#7B898F] sm:text-[15px] dark:text-slate-300">
             Discover how MentorLagbe helps students find the right tutors,
             connect with academic mentors, and move closer to their learning goals.
           </p>
@@ -60,7 +60,7 @@ export default function Review() {
           {reviews.map((review) => (
             <article
               key={review.id}
-              className="group flex flex-col rounded-xl border border-[#E9EEEE] bg-white p-5 shadow-[0_3px_15px_rgba(23,32,45,0.025)] transition-all duration-300 hover:-translate-y-1 hover:border-[#B9DEDA] hover:shadow-[0_10px_25px_rgba(57,155,152,0.08)]"
+              className="group flex flex-col rounded-xl border border-[#E9EEEE] bg-white p-5 shadow-[0_3px_15px_rgba(23,32,45,0.025)] transition-all duration-300 hover:-translate-y-1 hover:border-[#B9DEDA] hover:shadow-[0_10px_25px_rgba(57,155,152,0.08)] dark:border-[#1E2C42] dark:bg-[#111C2E] dark:hover:border-[#399B98]/30"
             >
               {/* Star Rating */}
               <div className="mb-4 flex items-center gap-0.5">
@@ -80,17 +80,17 @@ export default function Review() {
                   className="absolute -top-1 right-0 text-[#399B98]/10"
                 />
 
-                <p className="relative text-[12px] italic leading-[1.8] text-[#68777D]">
+                <p className="relative text-[12px] italic leading-[1.8] text-[#68777D] dark:text-slate-300">
                   &quot;{review.review}&quot;
                 </p>
               </div>
 
               {/* Divider */}
-              <div className="my-4 h-px w-full bg-[#EDF1F1]" />
+              <div className="my-4 h-px w-full bg-[#EDF1F1] dark:bg-[#0B1220]" />
 
               {/* Reviewer Information */}
               <div className="flex items-center gap-3">
-                <div className="h-10 w-10 shrink-0 overflow-hidden rounded-full border border-[#D5EBE8] bg-[#EAF6F5]">
+                <div className="h-10 w-10 shrink-0 overflow-hidden rounded-full border border-[#D5EBE8] bg-[#EAF6F5] dark:border-[#399B98]/30 dark:bg-[#399B98]/15">
                   <img
                     src={review.image}
                     alt={review.name}
@@ -102,11 +102,11 @@ export default function Review() {
                 </div>
 
                 <div className="min-w-0">
-                  <h3 className="truncate text-[11px] font-bold text-[#17202D]">
+                  <h3 className="truncate text-[11px] font-bold text-[#17202D] dark:text-foreground">
                     {review.name}
                   </h3>
 
-                  <p className="mt-0.5 text-[10px] text-[#89969B]">
+                  <p className="mt-0.5 text-[10px] text-[#89969B] dark:text-slate-400">
                     {review.role} · {review.location}
                   </p>
                 </div>

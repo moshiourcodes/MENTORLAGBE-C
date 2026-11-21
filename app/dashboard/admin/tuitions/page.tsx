@@ -109,7 +109,7 @@ export default async function AdminTuitionsPage() {
                             />
                             <button
                               type="submit"
-                              className="rounded-lg border border-[#CDEAE2] px-3 py-1.5 text-xs font-semibold text-[#2F8481] transition hover:bg-[#EAF7F3] dark:border-[#399B98]/30 dark:hover:bg-[#399B98]/10"
+                              className="rounded-lg border border-[#CDEAE2] px-3 py-1.5 text-xs font-semibold text-[#2F8481] transition hover:bg-[#EAF7F3] dark:border-[#399B98]/30 dark:hover:bg-[#399B98]/10 dark:text-[#5FD3C9]"
                             >
                               Approve
                             </button>
@@ -126,7 +126,7 @@ export default async function AdminTuitionsPage() {
                             />
                             <button
                               type="submit"
-                              className="rounded-lg border border-[#F5D5D5] px-3 py-1.5 text-xs font-semibold text-[#C24B4B] transition hover:bg-[#FDECEC] dark:border-[#D45B5B]/30 dark:hover:bg-[#D45B5B]/10"
+                              className="rounded-lg border border-[#F5D5D5] px-3 py-1.5 text-xs font-semibold text-[#C24B4B] transition hover:bg-[#FDECEC] dark:border-[#D45B5B]/30 dark:hover:bg-[#D45B5B]/10 dark:text-[#F0A3A3]"
                             >
                               Reject
                             </button>
@@ -144,7 +144,7 @@ export default async function AdminTuitionsPage() {
 
       <Link
         href="/dashboard/admin"
-        className="inline-flex text-xs font-semibold text-[#399B98] hover:underline"
+        className="inline-flex text-xs font-semibold text-[#399B98] hover:underline dark:text-[#5FD3C9]"
       >
         ← Back to overview
       </Link>

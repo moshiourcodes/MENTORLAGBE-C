@@ -27,7 +27,7 @@ export default async function SavedTuitionsPage() {
 
       <Link
         href="/dashboard/student"
-        className="inline-flex text-xs font-semibold text-[#399B98] hover:underline"
+        className="inline-flex text-xs font-semibold text-[#399B98] hover:underline dark:text-[#5FD3C9]"
       >
         ← Back to overview
       </Link>

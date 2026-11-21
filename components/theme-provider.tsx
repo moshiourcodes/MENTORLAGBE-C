@@ -1,7 +1,11 @@
-
 "use client";
 
 import * as React from "react";
+
+import {
+  ThemeProvider as NextThemesProvider,
+  useTheme as useNextThemes,
+} from "next-themes";
 
 type Theme = "light" | "dark" | "system";
 
@@ -24,6 +28,10 @@ const ThemeContext = React.createContext<ThemeContextType | undefined>(
   undefined
 );
 
+/**
+ * Public hook used across the app. Kept intentionally identical to the
+ * previous custom API so existing callers keep working unchanged.
+ */
 export function useTheme() {
   const context = React.useContext(ThemeContext);
 
@@ -47,81 +55,36 @@ function isTypingTarget(target: EventTarget | null) {
   );
 }
 
-export function ThemeProvider({
-  children,
-  defaultTheme = "system",
-  enableSystem = true,
-  storageKey = "mentorlagbe-theme",
-}: ThemeProviderProps) {
-  const [theme, setThemeState] = React.useState<Theme>(defaultTheme);
+function isTheme(value: string | undefined): value is Theme {
+  return value === "light" || value === "dark" || value === "system";
+}
 
-  const [resolvedTheme, setResolvedTheme] = React.useState<
-    "light" | "dark"
-  >("light");
+/**
+ * Bridges `next-themes` into the app-wide context and keeps the
+ * legacy "D" keyboard shortcut for toggling the theme.
+ */
+function ThemeBridge({ children }: { children: React.ReactNode }) {
+  const { theme, resolvedTheme, setTheme: setNextTheme } = useNextThemes();
 
-  // Load saved theme preference
-  React.useEffect(() => {
-    try {
-      const savedTheme = localStorage.getItem(storageKey) as Theme | null;
-
-      if (
-        savedTheme === "light" ||
-        savedTheme === "dark" ||
-        savedTheme === "system"
-      ) {
-        setThemeState(savedTheme);
-      }
-    } catch (error) {
-      console.error("Unable to load saved theme:", error);
-    }
-  }, [storageKey]);
-
-  // Apply theme and follow system preference
-  React.useEffect(() => {
-    const mediaQuery = window.matchMedia(
-      "(prefers-color-scheme: dark)"
-    );
-
-    const updateTheme = () => {
-      const systemTheme = mediaQuery.matches ? "dark" : "light";
-
-      const nextTheme =
-        theme === "system" && enableSystem
-          ? systemTheme
-          : theme === "dark"
-            ? "dark"
-            : "light";
-
-      setResolvedTheme(nextTheme);
-
-      document.documentElement.classList.remove("light", "dark");
-      document.documentElement.classList.add(nextTheme);
-    };
-
-    updateTheme();
-
-    mediaQuery.addEventListener("change", updateTheme);
-
-    return () => {
-      mediaQuery.removeEventListener("change", updateTheme);
-    };
-  }, [theme, enableSystem]);
-
-  // Save theme preference
   const setTheme = React.useCallback(
     (nextTheme: Theme) => {
-      setThemeState(nextTheme);
-
-      try {
-        localStorage.setItem(storageKey, nextTheme);
-      } catch (error) {
-        console.error("Unable to save theme:", error);
-      }
+      setNextTheme(nextTheme);
     },
-    [storageKey]
+    [setNextTheme]
   );
 
-  // Keyboard shortcut: D
+  const resolved: "light" | "dark" = resolvedTheme === "dark" ? "dark" : "light";
+
+  const contextValue = React.useMemo<ThemeContextType>(
+    () => ({
+      theme: isTheme(theme) ? theme : "system",
+      resolvedTheme: resolved,
+      setTheme,
+    }),
+    [theme, resolved, setTheme]
+  );
+
+  // Keyboard shortcut: D (ignored while typing)
   React.useEffect(() => {
     function onKeyDown(event: KeyboardEvent) {
       if (event.defaultPrevented || event.repeat) {
@@ -132,7 +95,6 @@ export function ThemeProvider({
         return;
       }
 
-      // FIX: Check that event.key is a string before using toLowerCase()
       if (
         typeof event.key !== "string" ||
         event.key.toLowerCase() !== "d"
@@ -140,12 +102,11 @@ export function ThemeProvider({
         return;
       }
 
-      // Don't change theme while typing
       if (isTypingTarget(event.target)) {
         return;
       }
 
-      setTheme(resolvedTheme === "dark" ? "light" : "dark");
+      setTheme(resolved === "dark" ? "light" : "dark");
     }
 
     window.addEventListener("keydown", onKeyDown);
@@ -153,20 +114,33 @@ export function ThemeProvider({
     return () => {
       window.removeEventListener("keydown", onKeyDown);
     };
-  }, [resolvedTheme, setTheme]);
-
-  const contextValue = React.useMemo(
-    () => ({
-      theme,
-      resolvedTheme,
-      setTheme,
-    }),
-    [theme, resolvedTheme, setTheme]
-  );
+  }, [resolved, setTheme]);
 
   return (
     <ThemeContext.Provider value={contextValue}>
       {children}
     </ThemeContext.Provider>
+  );
+}
+
+export function ThemeProvider({
+  children,
+  attribute = "class",
+  defaultTheme = "system",
+  enableSystem = true,
+  disableTransitionOnChange = false,
+  storageKey = "mentorlagbe-theme",
+}: ThemeProviderProps) {
+  return (
+    <NextThemesProvider
+      attribute={attribute}
+      defaultTheme={defaultTheme}
+      enableSystem={enableSystem}
+      disableTransitionOnChange={disableTransitionOnChange}
+      storageKey={storageKey}
+      enableColorScheme
+    >
+      <ThemeBridge>{children}</ThemeBridge>
+    </NextThemesProvider>
   );
 }

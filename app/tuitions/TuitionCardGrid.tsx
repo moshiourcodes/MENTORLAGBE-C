@@ -111,7 +111,7 @@ export default function TuitionCardGrid({
         <h3 className="text-lg font-semibold text-slate-800 dark:text-white">
           No Approved Tuitions Yet
         </h3>
-        <p className="mt-2 text-sm text-slate-500">
+        <p className="mt-2 text-sm text-slate-500 dark:text-slate-400">
           New tuition opportunities will appear here.
         </p>
       </div>

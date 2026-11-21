@@ -9,7 +9,7 @@ export default function FeaturedTuitions() {
 
         <div className="mb-10 flex flex-col justify-between gap-5 sm:flex-row sm:items-end">
           <div>
-            <span className="inline-flex rounded-full bg-[#E5F4F2] px-4 py-1 text-xs font-semibold uppercase tracking-wide text-[#218C87]">
+            <span className="inline-flex rounded-full bg-[#E5F4F2] px-4 py-1 text-xs font-semibold uppercase tracking-wide text-[#218C87] dark:bg-[#399B98]/15 dark:text-[#5FD3C9]">
               Featured Tuitions
             </span>
 
@@ -25,7 +25,7 @@ export default function FeaturedTuitions() {
 
           <Link
             href="/tuitions"
-            className="inline-flex shrink-0 items-center gap-2 font-semibold text-[#218C87] transition hover:gap-3"
+            className="inline-flex shrink-0 items-center gap-2 font-semibold text-[#218C87] transition hover:gap-3 dark:text-[#5FD3C9]"
           >
             Browse All Tuitions
             <span>→</span>

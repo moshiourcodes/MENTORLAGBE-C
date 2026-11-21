@@ -171,7 +171,7 @@
 
 //         {/* Bottom Footer */}
 //         <div className="flex flex-col items-center justify-between gap-4 sm:flex-row">
-//           <p className="text-center text-[10px] text-[#91ABAC] sm:text-left">
+//           <p className="text-center text-[10px] text-[#91ABAC] sm:text-left dark:text-slate-400">
 //             © {new Date().getFullYear()} MentorLagbe. All rights reserved.
 //           </p>
 
@@ -180,7 +180,7 @@
 //               <Link
 //                 key={link.name}
 //                 href={link.href}
-//                 className="text-[10px] text-[#91ABAC] transition-colors hover:text-[#8AD4CE]"
+//                 className="text-[10px] text-[#91ABAC] transition-colors hover:text-[#8AD4CE] dark:text-slate-400"
 //               >
 //                 {link.name}
 //               </Link>
@@ -387,7 +387,7 @@ export default function Footer() {
 
         {/* Bottom Footer */}
         <div className="flex flex-col items-center justify-between gap-4 sm:flex-row">
-          <p className="text-center text-[10px] text-[#91ABAC] sm:text-left">
+          <p className="text-center text-[10px] text-[#91ABAC] sm:text-left dark:text-slate-400">
             © {new Date().getFullYear()} MentorLagbe. All rights reserved.
           </p>
 
@@ -396,7 +396,7 @@ export default function Footer() {
               <Link
                 key={link.name}
                 href={link.href}
-                className="text-[10px] text-[#91ABAC] transition-colors hover:text-[#8AD4CE]"
+                className="text-[10px] text-[#91ABAC] transition-colors hover:text-[#8AD4CE] dark:text-slate-400"
               >
                 {link.name}
               </Link>

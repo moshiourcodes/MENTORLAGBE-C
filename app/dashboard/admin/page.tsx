@@ -154,7 +154,7 @@ export default async function AdminDashboardPage() {
             <h3 className="text-base font-bold text-foreground">Recent Users</h3>
             <Link
               href="/dashboard/admin/users"
-              className="text-xs font-semibold text-[#399B98] hover:underline"
+              className="text-xs font-semibold text-[#399B98] hover:underline dark:text-[#5FD3C9]"
             >
               View all
             </Link>
@@ -209,7 +209,7 @@ export default async function AdminDashboardPage() {
             </h3>
             <Link
               href="/dashboard/admin/tuitions"
-              className="text-xs font-semibold text-[#399B98] hover:underline"
+              className="text-xs font-semibold text-[#399B98] hover:underline dark:text-[#5FD3C9]"
             >
               View all
             </Link>
@@ -258,7 +258,7 @@ export default async function AdminDashboardPage() {
           </h3>
           <Link
             href="/dashboard/admin/applications"
-            className="text-xs font-semibold text-[#399B98] hover:underline"
+            className="text-xs font-semibold text-[#399B98] hover:underline dark:text-[#5FD3C9]"
           >
             View all
           </Link>

@@ -303,7 +303,7 @@ export function DashboardSidebar({ user }: { user: DashboardUser }) {
             </span>
 
             <span className="truncate text-lg font-bold tracking-tight text-foreground group-data-[collapsible=icon]:hidden">
-              Mentor<span className="text-[#399B98]">Lagbe</span>
+              Mentor<span className="text-[#399B98] dark:text-[#5FD3C9]">Lagbe</span>
             </span>
           </Link>
 

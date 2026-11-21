@@ -120,7 +120,7 @@ export default function AboutPage() {
             Connecting Bangladesh’s
             <br className="hidden sm:block" />
             Ambitious Students with
-            <span className="block text-[#159B90]">
+            <span className="block text-[#159B90] dark:text-[#5FD3C9]">
               Exceptional Mentors
             </span>
           </h1>
@@ -142,7 +142,7 @@ export default function AboutPage() {
 
             {/* Mission Content */}
             <div>
-              <span className="text-sm font-semibold uppercase tracking-wider text-[#159B90]">
+              <span className="text-sm font-semibold uppercase tracking-wider text-[#159B90] dark:text-[#5FD3C9]">
                 Our Educational Mission
               </span>
 
@@ -169,10 +169,10 @@ export default function AboutPage() {
             <div className="grid grid-cols-2 gap-4">
 
               <div className="flex min-h-38.75 flex-col items-center justify-center rounded-[24px] border border-slate-100 bg-[#F8FAFC] p-5 text-center dark:border-slate-800 dark:bg-slate-900">
-                <span className="text-3xl font-bold tracking-tight text-[#159B90] sm:text-4xl">
+                <span className="text-3xl font-bold tracking-tight text-[#159B90] sm:text-4xl dark:text-[#5FD3C9]">
                   1:1
                 </span>
-                <p className="mt-3 text-sm font-medium text-slate-500 sm:text-base">
+                <p className="mt-3 text-sm font-medium text-slate-500 sm:text-base dark:text-slate-400">
                   Personalized Learning
                 </p>
               </div>
@@ -181,7 +181,7 @@ export default function AboutPage() {
                 <span className="text-3xl font-bold tracking-tight sm:text-4xl">
                   2
                 </span>
-                <p className="mt-3 text-sm font-medium text-slate-500 sm:text-base">
+                <p className="mt-3 text-sm font-medium text-slate-500 sm:text-base dark:text-slate-400">
                   Learning Modes
                 </p>
               </div>
@@ -190,16 +190,16 @@ export default function AboutPage() {
                 <span className="text-3xl font-bold tracking-tight sm:text-4xl">
                   64
                 </span>
-                <p className="mt-3 text-sm font-medium text-slate-500 sm:text-base">
+                <p className="mt-3 text-sm font-medium text-slate-500 sm:text-base dark:text-slate-400">
                   Districts in Bangladesh
                 </p>
               </div>
 
               <div className="flex min-h-38.75 flex-col items-center justify-center rounded-[24px] border border-slate-100 bg-[#F8FAFC] p-5 text-center dark:border-slate-800 dark:bg-slate-900">
-                <span className="text-3xl font-bold tracking-tight text-[#159B90] sm:text-4xl">
+                <span className="text-3xl font-bold tracking-tight text-[#159B90] sm:text-4xl dark:text-[#5FD3C9]">
                   All
                 </span>
-                <p className="mt-3 text-sm font-medium text-slate-500 sm:text-base">
+                <p className="mt-3 text-sm font-medium text-slate-500 sm:text-base dark:text-slate-400">
                   Learning Levels
                 </p>
               </div>
@@ -240,7 +240,7 @@ export default function AboutPage() {
                 key={item.title}
                 className="rounded-[26px] border border-slate-200 bg-white p-8 transition duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-slate-200/50 dark:border-slate-800 dark:bg-card dark:hover:shadow-black/20 sm:p-10"
               >
-                <div className="flex size-17.5 items-center justify-center rounded-[20px] bg-[#EAF7F5] text-[#159B90] dark:bg-[#163B3A]">
+                <div className="flex size-17.5 items-center justify-center rounded-[20px] bg-[#EAF7F5] text-[#159B90] dark:bg-[#163B3A] dark:text-[#5FD3C9]">
                   <Icon size={34} strokeWidth={2} />
                 </div>
 
@@ -295,7 +295,7 @@ export default function AboutPage() {
                     {item.number}
                   </span>
 
-                  <div className="flex size-14 items-center justify-center rounded-[18px] bg-[#EAF7F5] text-[#159B90] dark:bg-[#163B3A]">
+                  <div className="flex size-14 items-center justify-center rounded-[18px] bg-[#EAF7F5] text-[#159B90] dark:bg-[#163B3A] dark:text-[#5FD3C9]">
                     <Icon size={25} />
                   </div>
 
@@ -341,17 +341,17 @@ export default function AboutPage() {
           {faqs.map((faq, ) => (
             <details
               key={faq.question}
-              className="group rounded-[24px] border border-slate-200 bg-white px-7 py-6 transition hover:border-[#B9E6E1] open:border-[#B9E6E1] dark:border-slate-800 dark:bg-card dark:hover:border-[#287F7C]"
+              className="group rounded-[24px] border border-slate-200 bg-white px-7 py-6 transition hover:border-[#B9E6E1] open:border-[#B9E6E1] dark:border-slate-800 dark:bg-card dark:hover:border-[#287F7C] dark:open:border-[#399B98]/30"
             >
 
               <summary className="flex cursor-pointer list-none items-center justify-between gap-5 text-lg font-bold tracking-tight [&::-webkit-details-marker]:hidden">
-                <span className="transition-colors group-open:text-[#159B90]">
+                <span className="transition-colors group-open:text-[#159B90] dark:group-open:text-[#5FD3C9]">
                   {faq.question}
                 </span>
 
                 <ChevronDown
                   size={22}
-                  className="shrink-0 text-slate-400 transition-transform duration-300 group-open:rotate-180 group-open:text-[#159B90]"
+                  className="shrink-0 text-slate-400 transition-transform duration-300 group-open:rotate-180 group-open:text-[#159B90] dark:group-open:text-[#5FD3C9]"
                 />
               </summary>
 
@@ -392,7 +392,7 @@ export default function AboutPage() {
 
             <Link
               href="/tuition"
-              className="inline-flex min-h-16 items-center justify-center rounded-[18px] border border-slate-300 bg-white px-9 text-base font-bold text-[#17202D] transition hover:-translate-y-1 hover:border-[#159B90] hover:text-[#159B90] dark:border-slate-700 dark:bg-card dark:text-foreground"
+              className="inline-flex min-h-16 items-center justify-center rounded-[18px] border border-slate-300 bg-white px-9 text-base font-bold text-[#17202D] transition hover:-translate-y-1 hover:border-[#159B90] hover:text-[#159B90] dark:border-slate-700 dark:bg-card dark:text-foreground dark:hover:text-[#5FD3C9]"
             >
               Browse Tuitions
             </Link>

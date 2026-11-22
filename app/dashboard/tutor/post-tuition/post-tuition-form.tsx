@@ -1,9 +1,10 @@
 "use client"
 
-import { useActionState, useEffect } from "react"
+import { useActionState, useEffect, useState } from "react"
 import { LoaderCircle, Plus } from "lucide-react"
 import { toast } from "sonner"
 
+import { UpgradeDialog } from "@/components/UpgradeDialog"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import {
@@ -37,17 +38,31 @@ const classLevels = [
   "Other",
 ]
 
-export function PostTuitionForm() {
+export function PostTuitionForm({
+  currentPlan = "free",
+}: {
+  currentPlan?: "free" | "pro"
+}) {
+  const [upgradeOpen, setUpgradeOpen] = useState(false)
+
   const [state, formAction, isPending] = useActionState(
-    createTuition,
+    async (previous: PostTuitionState, formData: FormData) => {
+      const result = await createTuition(previous, formData)
+
+      if (result.upgradeRequired) {
+        setUpgradeOpen(true)
+      }
+
+      return result
+    },
     initialState
   )
 
   useEffect(() => {
-    if (state.error) {
+    if (!state.upgradeRequired && state.error) {
       toast.error(state.error)
     }
-  }, [state.error])
+  }, [state.error, state.upgradeRequired])
 
   return (
     <form action={formAction} className="space-y-5">
@@ -193,6 +208,14 @@ export function PostTuitionForm() {
         )}
         {isPending ? "Submitting..." : "Submit for Approval"}
       </button>
+
+      <UpgradeDialog
+        open={upgradeOpen}
+        onOpenChange={setUpgradeOpen}
+        role="tutor"
+        limit="tuitions"
+        currentPlan={currentPlan}
+      />
     </form>
   )
 }

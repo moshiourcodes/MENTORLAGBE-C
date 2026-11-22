@@ -1,6 +1,7 @@
 
 "use client";
 
+import { ProBadge } from "@/components/ProBadge";
 import { authClient } from "@/lib/auth-client";
 
 function getInitials(name: string) {
@@ -30,6 +31,7 @@ export default function NavbarUser() {
 
   const name = user.name || "User";
   const image = user.image;
+  const plan = (user as typeof user & { plan?: unknown }).plan;
 
   return (
     <div className="flex items-center gap-2.5 border-l border-gray-100 pl-4 dark:border-[#1E2C42]">
@@ -48,9 +50,12 @@ export default function NavbarUser() {
 
       {/* User Name */}
       <div className="hidden sm:block">
-        <p className="max-w-[130px] truncate text-xs font-medium text-[#17202D] dark:text-foreground">
-          {name}
-        </p>
+        <div className="flex items-center gap-1.5">
+          <p className="max-w-[130px] truncate text-xs font-medium text-[#17202D] dark:text-foreground">
+            {name}
+          </p>
+          <ProBadge plan={plan} compact />
+        </div>
       </div>
     </div>
   );

@@ -12,6 +12,7 @@ import { toast } from "sonner"
 
 import { authClient } from "@/lib/auth-client"
 import type { DashboardUser } from "@/lib/dashboard"
+import { ProBadge } from "@/components/ProBadge"
 import { ThemeToggle } from "@/components/ThemeToggle"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import {
@@ -76,6 +77,8 @@ export function DashboardHeader({ user }: { user: DashboardUser }) {
         <h1 className="truncate text-base font-bold text-foreground sm:text-lg">
           {workspaceTitles[user.role]}
         </h1>
+
+        <ProBadge plan={user.plan} compact />
       </div>
 
       <div className="flex items-center gap-2 sm:gap-3">

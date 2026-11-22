@@ -1,13 +1,4 @@
 
-
-
-
-
-
-
-
-
-
 "use client";
 
 import { useState } from "react";
@@ -28,6 +19,9 @@ import {
   CheckCircle2,
 } from "lucide-react";
 import { toast } from "sonner";
+
+import { UpgradeDialog } from "@/components/UpgradeDialog";
+import type { UpgradeLimit } from "@/lib/payments";
 
 interface Tuition {
   _id: string;
@@ -51,18 +45,22 @@ interface Props {
   tuition: Tuition;
   userRole: string | null;
   isLoggedIn: boolean;
+  userPlan?: "free" | "pro";
 }
 
 export default function TuitionDetails({
   tuition,
   userRole,
   isLoggedIn,
+  userPlan = "free",
 }: Props) {
   const router = useRouter();
 
   const [applying, setApplying] = useState(false);
   const [applied, setApplied] = useState(false);
   const [bookmarked, setBookmarked] = useState(false);
+  const [bookmarking, setBookmarking] = useState(false);
+  const [upgradeLimit, setUpgradeLimit] = useState<UpgradeLimit | null>(null);
 
   const isOnline = tuition.mode === "online";
   const isStudent = isLoggedIn && userRole === "student";
@@ -88,9 +86,7 @@ export default function TuitionDetails({
       return;
     }
 
-    if (applied || applying) {
-      return;
-    }
+    if (applied || applying) return;
 
     try {
       setApplying(true);
@@ -106,6 +102,12 @@ export default function TuitionDetails({
       });
 
       const result = await response.json();
+
+      // Free plan application limit reached — server-enforced, dialog shown.
+      if (result.upgradeRequired) {
+        setUpgradeLimit("applications");
+        return;
+      }
 
       if (!response.ok) {
         throw new Error(
@@ -128,6 +130,69 @@ export default function TuitionDetails({
       );
     } finally {
       setApplying(false);
+    }
+  };
+
+  // Add or remove a bookmark from the database
+  const handleBookmark = async () => {
+    if (!isLoggedIn) {
+      toast.error("Please sign in to bookmark this tuition.");
+      router.push("/sign-in");
+      return;
+    }
+
+    if (userRole !== "student") {
+      toast.error("Only students can bookmark tuitions.");
+      return;
+    }
+
+    if (bookmarking) return;
+
+    try {
+      setBookmarking(true);
+
+      const response = await fetch("/api/bookmarks", {
+        method: bookmarked ? "DELETE" : "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          tuitionId: tuition._id,
+        }),
+      });
+
+      const result = await response.json();
+
+      // Free plan bookmark limit reached — server-enforced, dialog shown.
+      if (result.upgradeRequired) {
+        setUpgradeLimit("bookmarks");
+        return;
+      }
+
+      if (!response.ok) {
+        throw new Error(
+          result.message || "Unable to update bookmark."
+        );
+      }
+
+      setBookmarked(!bookmarked);
+
+      toast.success(
+        result.message ||
+          (bookmarked
+            ? "Bookmark removed successfully."
+            : "Tuition bookmarked successfully.")
+      );
+
+      router.refresh();
+    } catch (error) {
+      toast.error(
+        error instanceof Error
+          ? error.message
+          : "Something went wrong while updating bookmark."
+      );
+    } finally {
+      setBookmarking(false);
     }
   };
 
@@ -205,19 +270,26 @@ export default function TuitionDetails({
 
                 <button
                   type="button"
-                  onClick={() => setBookmarked((previous) => !previous)}
-                  aria-label="Bookmark tuition"
+                  onClick={handleBookmark}
+                  disabled={bookmarking}
+                  aria-label={
+                    bookmarked ? "Remove bookmark" : "Bookmark tuition"
+                  }
                   aria-pressed={bookmarked}
-                  className="flex h-10 w-10 items-center justify-center rounded-full bg-white text-slate-700 shadow-md transition hover:bg-slate-100"
+                  className="flex h-10 w-10 items-center justify-center rounded-full bg-white text-slate-700 shadow-md transition hover:bg-slate-100 disabled:cursor-not-allowed disabled:opacity-60"
                 >
-                  <Bookmark
-                    size={17}
-                    className={
-                      bookmarked
-                        ? "fill-[#399B98] text-[#399B98]"
-                        : ""
-                    }
-                  />
+                  {bookmarking ? (
+                    <Loader2 size={17} className="animate-spin" />
+                  ) : (
+                    <Bookmark
+                      size={17}
+                      className={
+                        bookmarked
+                          ? "fill-[#399B98] text-[#399B98]"
+                          : ""
+                      }
+                    />
+                  )}
                 </button>
               </div>
             </div>
@@ -433,6 +505,16 @@ export default function TuitionDetails({
           </aside>
         </div>
       </div>
+
+      <UpgradeDialog
+        open={upgradeLimit !== null}
+        onOpenChange={(open) => {
+          if (!open) setUpgradeLimit(null);
+        }}
+        role="student"
+        limit={upgradeLimit ?? "applications"}
+        currentPlan={userPlan}
+      />
     </main>
   );
 }

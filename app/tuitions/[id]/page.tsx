@@ -90,10 +90,12 @@ export default async function TuitionDetailsPage({
   });
 
   // Get role from authenticated session
-  const userRole =
-    (session?.user as
-      | { role?: string }
-      | undefined)?.role ?? null;
+  const sessionUser = session?.user as
+    | { role?: string; plan?: string }
+    | undefined;
+
+  const userRole = sessionUser?.role ?? null;
+  const userPlan = sessionUser?.plan === "pro" ? "pro" : "free";
 
   // Render page outside try/catch
   return (
@@ -102,6 +104,7 @@ export default async function TuitionDetailsPage({
         tuition={tuition}
         userRole={userRole}
         isLoggedIn={Boolean(session?.user)}
+        userPlan={userPlan}
       />
 
       <Footer />

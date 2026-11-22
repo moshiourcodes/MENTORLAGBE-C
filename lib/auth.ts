@@ -111,7 +111,9 @@ const client = new MongoClient(databaseUrl);
 
 export const db = client.db("mentorlagbe");
 
-const allowedRoles = ["student", "tutor", "admin"] as const;
+// Public sign-up may never create an admin account. Admin is granted only
+// through trusted server-side/admin tooling.
+const allowedRoles = ["student", "tutor"] as const;
 
 export const auth = betterAuth({
   database: mongodbAdapter(db, { client }),
@@ -177,6 +179,7 @@ export const auth = betterAuth({
               ...user,
               role: selectedRole,
               roles: selectedRole,
+              plan: "free",
             },
           };
         },

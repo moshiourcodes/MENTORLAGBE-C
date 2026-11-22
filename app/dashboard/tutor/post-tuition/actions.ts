@@ -5,12 +5,14 @@ import { redirect } from "next/navigation"
 
 import { db } from "@/lib/auth"
 import { getDashboardUser } from "@/lib/dashboard"
+import { FREE_LIMITS } from "@/lib/payments"
 
 export type PostTuitionState = {
   error?: string
+  upgradeRequired?: boolean
+  limit?: "tuitions"
+  currentPlan?: "free" | "pro"
 }
-
-const FREE_TUITION_LIMIT = 2
 
 const SUBJECTS = [
   "Mathematics",
@@ -98,11 +100,14 @@ export async function createTuition(
       .collection("tuitions")
       .countDocuments({ tutorEmail: user.email })
 
-    const limit = user.plan === "pro" ? Number.POSITIVE_INFINITY : FREE_TUITION_LIMIT
+    const limit = user.plan === "pro" ? Number.POSITIVE_INFINITY : FREE_LIMITS.tuitions
 
     if (existingCount >= limit) {
       return {
-        error: `Your free plan allows up to ${FREE_TUITION_LIMIT} tuition posts. Upgrade to Pro for unlimited posts.`,
+        error: `Your free plan allows up to ${FREE_LIMITS.tuitions} tuition posts. Upgrade to Tutor Pro for unlimited posts.`,
+        upgradeRequired: true,
+        limit: "tuitions",
+        currentPlan: "free",
       }
     }
 

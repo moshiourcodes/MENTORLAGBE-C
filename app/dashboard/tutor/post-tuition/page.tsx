@@ -53,11 +53,11 @@ export default async function PostTuitionPage() {
           description={`You have used all ${FREE_TUITION_LIMIT} free tuition posts. Upgrade to Pro for unlimited listings, a featured badge, and priority ranking.`}
           action={{ label: "View Pro Pricing", href: "/pricing", icon: Crown }}
         />
-      ) : (
-        <section className="rounded-2xl border border-border bg-card p-5 sm:p-6">
-          <PostTuitionForm />
-        </section>
-      )}
+      ) : null}
+
+      <section className="rounded-2xl border border-border bg-card p-5 sm:p-6">
+        <PostTuitionForm currentPlan={user.plan} />
+      </section>
 
       <Link
         href="/dashboard/tutor"

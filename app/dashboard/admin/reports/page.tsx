@@ -57,8 +57,11 @@ export default async function AdminReportsPage() {
       <div className="grid gap-4 sm:grid-cols-2">
         <StatCard
           label="Stripe Revenue"
-          value={`৳${stats.revenue.toLocaleString("en-US")}`}
-          hint="Total paid transactions"
+          value={`$${(stats.revenue / 100).toLocaleString("en-US", {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+          })}`}
+          hint="Total paid transactions (USD)"
           icon={Wallet}
           iconClassName="bg-[#FDF3E2] text-[#C98A2B] dark:bg-[#C98A2B]/15 dark:text-[#F0C57E]"
         />

@@ -329,7 +329,7 @@ import { toast } from "sonner";
 
 import { authClient } from "@/lib/auth-client";
 
-type UserRole = "student" | "tutor" | "admin";
+type UserRole = "student" | "tutor";
 
 export default function SignUpPage() {
   const router = useRouter();
@@ -390,11 +390,7 @@ export default function SignUpPage() {
         }
       ).role;
 
-      const allowedRoles: UserRole[] = [
-        "student",
-        "tutor",
-        "admin",
-      ];
+      const allowedRoles: UserRole[] = ["student", "tutor"];
 
       if (
         typeof savedRole !== "string" ||
@@ -583,7 +579,6 @@ export default function SignUpPage() {
             >
               <option value="student">Student</option>
               <option value="tutor">Tutor</option>
-              <option value="admin">Admin</option>
             </select>
 
             <p className="mt-2 text-xs text-[#AAB6C7]">

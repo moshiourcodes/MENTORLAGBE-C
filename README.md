@@ -10,15 +10,9 @@ The platform includes role-based dashboards, tuition management, bookmarking, an
 
 **Live URL:**&#x20;
 
-## 🔐 Admin Credentials
+## 🔐 Admin Access
 
-Use the following credentials to access the admin dashboard.
-
-- **Email:** moshior\@mail.com
-- **Password:** Munna11016
-- **Role:** Admin
-
-*Note: Replace these placeholders with your demo admin account credentials. Avoid publishing production passwords in a public repository.*
+Admin accounts are server-managed only. Public sign-up creates **Student** or **Tutor** accounts exclusively.
 
 ## ✨ Key Features
 
@@ -131,13 +125,30 @@ npm install
 
 **4. Configure environment variables**
 
-Create a `.env.local` file:
+Create a `.env.local` file (see `.env.example`):
 
 ```env
+BETTER_AUTH_DB_URI=
+BETTER_AUTH_SECRET=
+BETTER_AUTH_URL=http://localhost:3000
+NEXT_PUBLIC_BETTER_AUTH_URL=http://localhost:3000
+STRIPE_SECRET_KEY=
+STRIPE_WEBHOOK_SECRET=
+NEXT_PUBLIC_APP_URL=http://localhost:3000
 NEXT_PUBLIC_API_URL=http://localhost:5000
 ```
 
-**5. Run the development server**
+**5. Configure Stripe webhooks locally**
+
+With the Stripe CLI installed, forward webhooks to the canonical route:
+
+```bash
+stripe listen --forward-to localhost:3000/api/payment/webhook
+```
+
+Copy the printed `whsec_...` value into `STRIPE_WEBHOOK_SECRET`.
+
+**6. Run the development server**
 
 ```bash
 npm run dev

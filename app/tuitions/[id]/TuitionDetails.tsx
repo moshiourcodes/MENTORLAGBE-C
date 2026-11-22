@@ -1,4 +1,13 @@
 
+
+
+
+
+
+
+
+
+
 "use client";
 
 import { useState } from "react";
@@ -15,8 +24,8 @@ import {
   Share2,
   Bookmark,
   Star,
-  CheckCircle2,
   Loader2,
+  CheckCircle2,
 } from "lucide-react";
 import { toast } from "sonner";
 
@@ -52,6 +61,7 @@ export default function TuitionDetails({
   const router = useRouter();
 
   const [applying, setApplying] = useState(false);
+  const [applied, setApplied] = useState(false);
   const [bookmarked, setBookmarked] = useState(false);
 
   const isOnline = tuition.mode === "online";
@@ -65,6 +75,7 @@ export default function TuitionDetails({
       })
     : "Recently";
 
+  // Submit tuition application
   const handleApply = async () => {
     if (!isLoggedIn) {
       toast.error("Please sign in to apply.");
@@ -74,6 +85,10 @@ export default function TuitionDetails({
 
     if (userRole !== "student") {
       toast.error("Only students can apply for tuitions.");
+      return;
+    }
+
+    if (applied || applying) {
       return;
     }
 
@@ -94,23 +109,29 @@ export default function TuitionDetails({
 
       if (!response.ok) {
         throw new Error(
-          result.message || "Unable to submit application."
+          result.message || "Unable to submit your application."
         );
       }
 
-      toast.success("Application submitted successfully!");
+      setApplied(true);
+
+      toast.success(
+        result.message || "Application submitted successfully!"
+      );
+
       router.refresh();
     } catch (error) {
       toast.error(
         error instanceof Error
           ? error.message
-          : "Something went wrong."
+          : "Something went wrong while applying."
       );
     } finally {
       setApplying(false);
     }
   };
 
+  // Share tuition
   const handleShare = async () => {
     try {
       if (navigator.share) {
@@ -132,7 +153,6 @@ export default function TuitionDetails({
   return (
     <main className="min-h-screen bg-[#F8FAFC] px-4 py-8 dark:bg-[#0B1220] sm:px-6 lg:px-8">
       <div className="mx-auto max-w-7xl">
-
         {/* Back Button */}
         <Link
           href="/tuitions"
@@ -143,29 +163,26 @@ export default function TuitionDetails({
         </Link>
 
         <div className="grid grid-cols-1 items-start gap-7 lg:grid-cols-[minmax(0,1fr)_360px]">
-
           {/* LEFT CONTENT */}
           <div className="space-y-7">
-
             {/* Tuition Image */}
             <div className="relative h-[300px] overflow-hidden rounded-2xl bg-slate-200 dark:bg-slate-800 sm:h-[420px]">
-              {tuition.bannerImage && (
+              {tuition.bannerImage ? (
                 <div
                   role="img"
                   aria-label={tuition.title}
                   className="absolute inset-0 bg-cover bg-center"
                   style={{
-                    backgroundImage: `url("${tuition.bannerImage.replace(/["\\]/g, "")}")`,
+                    backgroundImage: `url("${tuition.bannerImage.replace(/"/g, '\\"')}")`,
                   }}
                 />
-              )}
-
-              {!tuition.bannerImage && (
+              ) : (
                 <div className="absolute inset-0 flex items-center justify-center text-slate-400">
                   <UserRound size={60} />
                 </div>
               )}
 
+              {/* Online / Offline Badge */}
               <div className="absolute left-4 top-4 flex items-center gap-2 rounded-full bg-[#17202D]/90 px-4 py-2 text-xs font-semibold text-white">
                 {isOnline ? (
                   <Globe size={15} className="text-[#50C5BD]" />
@@ -175,22 +192,23 @@ export default function TuitionDetails({
                 {isOnline ? "Online Session" : "Offline Session"}
               </div>
 
+              {/* Share and Bookmark */}
               <div className="absolute right-4 top-4 flex gap-2">
                 <button
                   type="button"
                   onClick={handleShare}
                   aria-label="Share tuition"
-                  className="flex h-10 w-10 items-center justify-center rounded-full bg-white text-slate-700 shadow-md hover:bg-slate-100"
+                  className="flex h-10 w-10 items-center justify-center rounded-full bg-white text-slate-700 shadow-md transition hover:bg-slate-100"
                 >
                   <Share2 size={17} />
                 </button>
 
                 <button
                   type="button"
-                  onClick={() => setBookmarked(!bookmarked)}
+                  onClick={() => setBookmarked((previous) => !previous)}
                   aria-label="Bookmark tuition"
                   aria-pressed={bookmarked}
-                  className="flex h-10 w-10 items-center justify-center rounded-full bg-white text-slate-700 shadow-md hover:bg-slate-100"
+                  className="flex h-10 w-10 items-center justify-center rounded-full bg-white text-slate-700 shadow-md transition hover:bg-slate-100"
                 >
                   <Bookmark
                     size={17}
@@ -280,6 +298,7 @@ export default function TuitionDetails({
                         <Star key={star} size={14} />
                       ))}
                     </div>
+
                     <p className="text-[10px] text-slate-500">
                       0 reviews
                     </p>
@@ -298,7 +317,6 @@ export default function TuitionDetails({
 
           {/* RIGHT SIDEBAR */}
           <aside className="rounded-2xl border border-slate-200 bg-white p-6 shadow-md dark:border-slate-800 dark:bg-[#111C2E] lg:sticky lg:top-24">
-
             {/* Monthly Fee */}
             <div className="rounded-xl border border-slate-100 bg-slate-50 p-4 dark:border-slate-800 dark:bg-slate-900">
               <p className="text-xs font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">
@@ -328,9 +346,7 @@ export default function TuitionDetails({
               <InfoRow
                 label="Location"
                 value={
-                  isOnline
-                    ? "Online"
-                    : tuition.location || "Not specified"
+                  isOnline ? "Online" : tuition.location || "Not specified"
                 }
               />
 
@@ -375,13 +391,18 @@ export default function TuitionDetails({
                 <button
                   type="button"
                   onClick={handleApply}
-                  disabled={applying}
+                  disabled={applying || applied}
                   className="flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-[#399B98] text-sm font-semibold text-white transition hover:bg-[#287F7C] disabled:cursor-not-allowed disabled:opacity-60"
                 >
                   {applying ? (
                     <>
                       <Loader2 size={17} className="animate-spin" />
                       Applying...
+                    </>
+                  ) : applied ? (
+                    <>
+                      <CheckCircle2 size={17} />
+                      Application Submitted
                     </>
                   ) : (
                     <>
@@ -416,6 +437,7 @@ export default function TuitionDetails({
   );
 }
 
+// Reusable information row
 function InfoRow({
   label,
   value,

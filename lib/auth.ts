@@ -1,122 +1,50 @@
+import { betterAuth } from "better-auth"
+import { jwt } from "better-auth/plugins"
+import { MongoClient } from "mongodb"
+import { mongodbAdapter } from "@better-auth/mongo-adapter"
 
-
-// import { betterAuth } from "better-auth";
-// import { MongoClient } from "mongodb";
-// import { mongodbAdapter } from "@better-auth/mongo-adapter";
-
-// const databaseUrl = process.env.BETTER_AUTH_DB_URI;
-
-// if (!databaseUrl) {
-//   throw new Error(
-//     "BETTER_AUTH_DB_URI is missing from environment variables."
-//   );
-// }
-
-// const client = new MongoClient(databaseUrl);
-// export const db = client.db("mentorlagbe");
-
-// export const auth = betterAuth({
-//   database: mongodbAdapter(db, { client }),
-
-//   emailAndPassword: {
-//     enabled: true,
-//   },
-
-//   user: {
-//     additionalFields: {
-//       role: {
-//         type: ["student", "tutor"],
-//         required: false,
-//         defaultValue: "student",
-//         input: true,
-//       },
-
-//       // Server-managed list of available roles.
-//       roles: {
-//         type: "string",
-//         required: false,
-//         defaultValue: "student",
-//         input: false,
-//       },
-
-//       phone: {
-//         type: "string",
-//         required: false,
-//         input: true,
-//       },
-
-//       bio: {
-//         type: "string",
-//         required: false,
-//         input: true,
-//       },
-
-//       plan: {
-//         type: "string",
-//         required: false,
-//         defaultValue: "free",
-//         input: false,
-//       },
-//     },
-//   },
-
-//   // Initialize roles using the role selected at signup.
-//   databaseHooks: {
-//     user: {
-//       create: {
-//         before: async (user) => {
-//           const initialRole =
-//             user.role === "tutor" ? "tutor" : "student";
-
-//           return {
-//             data: {
-//               ...user,
-//               role: initialRole,
-//               roles: initialRole,
-//             },
-//           };
-//         },
-//       },
-//     },
-//   },
-
-//   socialProviders: {
-//     google: {
-//       clientId: process.env.GOOGLE_CLIENT_ID as string,
-//       clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
-//     },
-//   },
-// });
-
-
-
-
-
-
-
-
-import { betterAuth } from "better-auth";
-import { MongoClient } from "mongodb";
-import { mongodbAdapter } from "@better-auth/mongo-adapter";
-
-const databaseUrl = process.env.BETTER_AUTH_DB_URI;
+const databaseUrl = process.env.BETTER_AUTH_DB_URI
 
 if (!databaseUrl) {
-  throw new Error(
-    "BETTER_AUTH_DB_URI is missing from environment variables."
-  );
+  throw new Error("BETTER_AUTH_DB_URI is missing from environment variables.")
 }
 
-const client = new MongoClient(databaseUrl);
+const client = new MongoClient(databaseUrl)
 
-export const db = client.db("mentorlagbe");
+export const db = client.db("mentorlagbe")
 
 // Public sign-up may never create an admin account. Admin is granted only
 // through trusted server-side/admin tooling.
-const allowedRoles = ["student", "tutor"] as const;
+const allowedRoles = ["student", "tutor"] as const
+
+// JWTs are only a bridge for the separate Express API. Better Auth sessions
+// remain the primary authentication system.
+const jwtIssuer =
+  process.env.NEXT_PUBLIC_APP_URL ||
+  process.env.BETTER_AUTH_URL ||
+  "http://localhost:3000"
+const jwtAudience = "mentorlagbe-express"
 
 export const auth = betterAuth({
   database: mongodbAdapter(db, { client }),
+
+  plugins: [
+    jwt({
+      jwt: {
+        issuer: jwtIssuer,
+        audience: jwtAudience,
+        expirationTime: "15m",
+        // Keep the bridge token minimal — never include secrets or raw user
+        // documents. The subject remains the Better Auth user id.
+        definePayload: ({ user }) => ({
+          email: user.email,
+          name: user.name,
+          role: typeof user.role === "string" ? user.role : "student",
+          plan: user.plan === "pro" ? "pro" : "free",
+        }),
+      },
+    }),
+  ],
 
   emailAndPassword: {
     enabled: true,
@@ -164,7 +92,7 @@ export const auth = betterAuth({
     user: {
       create: {
         before: async (user) => {
-          const requestedRole = user.role;
+          const requestedRole = user.role
 
           const selectedRole =
             typeof requestedRole === "string" &&
@@ -172,7 +100,7 @@ export const auth = betterAuth({
               requestedRole as (typeof allowedRoles)[number]
             )
               ? requestedRole
-              : "student";
+              : "student"
 
           return {
             data: {
@@ -181,7 +109,7 @@ export const auth = betterAuth({
               roles: selectedRole,
               plan: "free",
             },
-          };
+          }
         },
       },
     },
@@ -193,9 +121,4 @@ export const auth = betterAuth({
       clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
     },
   },
-});
-
-
-
-
-
+})

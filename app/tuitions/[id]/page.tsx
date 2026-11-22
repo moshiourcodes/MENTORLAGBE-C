@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { headers } from "next/headers";
 
 import { auth } from "@/lib/auth";
+import { fetchExpress } from "@/lib/express-api";
 import Footer from "@/components/Footer";
 import TuitionDetails from "./TuitionDetails";
 
@@ -41,16 +42,12 @@ export default async function TuitionDetailsPage({
 }: PageProps) {
   const { id } = await params;
 
-  const apiUrl =
-    process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
-
   let tuition: Tuition | undefined;
 
-  // Fetch tuition data
+  // Fetch tuition data from Express. Signed-in users get an optional JWT so
+  // the same endpoint can later personalise results without trusting the client.
   try {
-    const response = await fetch(`${apiUrl}/api/tuitions`, {
-      cache: "no-store",
-    });
+    const response = await fetchExpress("/api/tuitions");
 
     if (!response.ok) {
       throw new Error(

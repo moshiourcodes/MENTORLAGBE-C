@@ -1,20 +1,22 @@
-// import { betterAuth } from "better-auth"
-// import { MongoClient } from "mongodb"
-// import { mongodbAdapter } from "@better-auth/mongo-adapter"
 
-// const databaseUrl = process.env.BETTER_AUTH_DB_URI
+
+// import { betterAuth } from "better-auth";
+// import { MongoClient } from "mongodb";
+// import { mongodbAdapter } from "@better-auth/mongo-adapter";
+
+// const databaseUrl = process.env.BETTER_AUTH_DB_URI;
 
 // if (!databaseUrl) {
-//   throw new Error("BETTER_AUTH_DB_URI is missing from environment variables.")
+//   throw new Error(
+//     "BETTER_AUTH_DB_URI is missing from environment variables."
+//   );
 // }
 
-// const client = new MongoClient(databaseUrl)
-// const db = client.db("mentorlagbe")
+// const client = new MongoClient(databaseUrl);
+// export const db = client.db("mentorlagbe");
 
 // export const auth = betterAuth({
-//   database: mongodbAdapter(db, {
-//     client,
-//   }),
+//   database: mongodbAdapter(db, { client }),
 
 //   emailAndPassword: {
 //     enabled: true,
@@ -23,16 +25,57 @@
 //   user: {
 //     additionalFields: {
 //       role: {
-//         type: ["student","tutor","admin"],
-//         required: true,
+//         type: ["student", "tutor"],
+//         required: false,
+//         defaultValue: "student",
+//         input: true,
+//       },
+
+//       // Server-managed list of available roles.
+//       roles: {
+//         type: "string",
+//         required: false,
+//         defaultValue: "student",
+//         input: false,
+//       },
+
+//       phone: {
+//         type: "string",
+//         required: false,
+//         input: true,
+//       },
+
+//       bio: {
+//         type: "string",
+//         required: false,
 //         input: true,
 //       },
 
 //       plan: {
 //         type: "string",
-//         required: true,
+//         required: false,
 //         defaultValue: "free",
 //         input: false,
+//       },
+//     },
+//   },
+
+//   // Initialize roles using the role selected at signup.
+//   databaseHooks: {
+//     user: {
+//       create: {
+//         before: async (user) => {
+//           const initialRole =
+//             user.role === "tutor" ? "tutor" : "student";
+
+//           return {
+//             data: {
+//               ...user,
+//               role: initialRole,
+//               roles: initialRole,
+//             },
+//           };
+//         },
 //       },
 //     },
 //   },
@@ -43,8 +86,7 @@
 //       clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
 //     },
 //   },
-// })
-
+// });
 
 
 
@@ -66,7 +108,10 @@ if (!databaseUrl) {
 }
 
 const client = new MongoClient(databaseUrl);
+
 export const db = client.db("mentorlagbe");
+
+const allowedRoles = ["student", "tutor", "admin"] as const;
 
 export const auth = betterAuth({
   database: mongodbAdapter(db, { client }),
@@ -78,13 +123,12 @@ export const auth = betterAuth({
   user: {
     additionalFields: {
       role: {
-        type: ["student", "tutor"],
+        type: "string",
         required: false,
         defaultValue: "student",
         input: true,
       },
 
-      // Server-managed list of available roles.
       roles: {
         type: "string",
         required: false,
@@ -113,19 +157,26 @@ export const auth = betterAuth({
     },
   },
 
-  // Initialize roles using the role selected at signup.
+  // Preserve the selected role when creating a new user.
   databaseHooks: {
     user: {
       create: {
         before: async (user) => {
-          const initialRole =
-            user.role === "tutor" ? "tutor" : "student";
+          const requestedRole = user.role;
+
+          const selectedRole =
+            typeof requestedRole === "string" &&
+            allowedRoles.includes(
+              requestedRole as (typeof allowedRoles)[number]
+            )
+              ? requestedRole
+              : "student";
 
           return {
             data: {
               ...user,
-              role: initialRole,
-              roles: initialRole,
+              role: selectedRole,
+              roles: selectedRole,
             },
           };
         },
@@ -140,3 +191,8 @@ export const auth = betterAuth({
     },
   },
 });
+
+
+
+
+

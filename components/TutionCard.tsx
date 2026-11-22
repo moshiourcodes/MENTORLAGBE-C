@@ -165,3 +165,13 @@ export default function TuitionCard({ tuition }: TuitionCardProps) {
     </article>
   );
 }
+
+
+
+
+
+
+
+
+
+

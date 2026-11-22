@@ -13,9 +13,10 @@ const client = new MongoClient(databaseUrl)
 
 export const db = client.db("mentorlagbe")
 
-// Public sign-up may never create an admin account. Admin is granted only
-// through trusted server-side/admin tooling.
-const allowedRoles = ["student", "tutor"] as const
+// Public sign-up accepts all three platform roles, as explicitly requested by
+// the project owner. The value is still validated against this allowlist on
+// the server before it is written to the user document.
+const allowedRoles = ["student", "tutor", "admin"] as const
 
 // JWTs are only a bridge for the separate Express API. Better Auth sessions
 // remain the primary authentication system.
@@ -26,6 +27,10 @@ const jwtIssuer =
 const jwtAudience = "mentorlagbe-express"
 
 export const auth = betterAuth({
+  // Explicit base URL ensures OAuth callbacks are generated from the
+  // configured app origin rather than an inferred request host.
+  baseURL: process.env.BETTER_AUTH_URL,
+
   database: mongodbAdapter(db, { client }),
 
   plugins: [
@@ -52,11 +57,33 @@ export const auth = betterAuth({
 
   user: {
     additionalFields: {
+      // Server-owned. Clients cannot set or change this after creation.
       role: {
         type: "string",
         required: false,
         defaultValue: "student",
+        input: false,
+        returned: true,
+      },
+
+      // Public signup submits this temporary field; the create hook validates
+      // it and writes the trusted `role` field. It is never used to change an
+      // existing account.
+      signupRole: {
+        type: "string",
+        required: false,
         input: true,
+        returned: false,
+      },
+
+      // New OAuth users must choose Student or Tutor before using dashboards.
+      // Existing users without this field are treated as already configured.
+      roleSelected: {
+        type: "boolean",
+        required: false,
+        defaultValue: true,
+        input: false,
+        returned: true,
       },
 
       roles: {
@@ -92,22 +119,35 @@ export const auth = betterAuth({
     user: {
       create: {
         before: async (user) => {
-          const requestedRole = user.role
+          const { signupRole, ...storedUser } = user as typeof user & {
+            signupRole?: unknown
+          }
+          void signupRole
+
+          const requestedRole =
+            typeof signupRole === "string"
+              ? signupRole
+              : typeof user.role === "string"
+                ? user.role
+                : undefined
+
+          const hasEmailSignupRole = typeof requestedRole === "string"
 
           const selectedRole =
-            typeof requestedRole === "string" &&
+            hasEmailSignupRole &&
             allowedRoles.includes(
               requestedRole as (typeof allowedRoles)[number]
             )
-              ? requestedRole
+              ? (requestedRole as (typeof allowedRoles)[number])
               : "student"
 
           return {
             data: {
-              ...user,
+              ...storedUser,
               role: selectedRole,
               roles: selectedRole,
               plan: "free",
+              roleSelected: hasEmailSignupRole,
             },
           }
         },
@@ -115,10 +155,18 @@ export const auth = betterAuth({
     },
   },
 
+  // Google must always be registered, otherwise signIn.social() returns
+  // PROVIDER_NOT_FOUND. Credentials stay server-only and are never logged.
   socialProviders: {
     google: {
-      clientId: process.env.GOOGLE_CLIENT_ID as string,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
+      // Accept the legacy misspelled variables still present in local .env
+      // files. Correct GOOGLE_* names take precedence when both are set.
+      clientId: (process.env.GOOGLE_CLIENT_ID ??
+        process.env.GOGGLE_CLIENT_ID) as string,
+      clientSecret: (process.env.GOOGLE_CLIENT_SECRET ??
+        process.env.GOGGLE_CLIENT_SECRET) as string,
+      scope: ["email", "profile"],
+      prompt: "select_account" as const,
     },
   },
 })

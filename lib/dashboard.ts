@@ -452,6 +452,8 @@ export type DashboardUser = {
   image: string | null;
   role: DashboardRole;
   plan: "free" | "pro";
+  /** False only for new OAuth users who still need to choose Student/Tutor. */
+  roleSelected?: boolean;
 };
 
 export type StudentStats = {
@@ -553,6 +555,7 @@ export const getDashboardUser = cache(
     const user = session.user as typeof session.user & {
       role?: unknown;
       plan?: unknown;
+      roleSelected?: unknown;
     };
 
     return {
@@ -562,6 +565,9 @@ export const getDashboardUser = cache(
       image: session.user.image ?? null,
       role: normalizeDashboardRole(user.role),
       plan: user.plan === "pro" ? "pro" : "free",
+      // Existing users have no flag; only explicit false means "needs setup".
+      roleSelected:
+        typeof user.roleSelected === "boolean" ? user.roleSelected : true,
     };
   }
 );

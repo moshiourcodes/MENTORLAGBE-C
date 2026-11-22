@@ -2,6 +2,7 @@
 
 import { LoaderCircle } from "lucide-react";
 
+import { GoogleLinkButton } from "@/components/GoogleLinkButton";
 import { authClient } from "@/lib/auth-client";
 import {
   ProfileForm,
@@ -53,6 +54,8 @@ export default function DashboardProfilePage() {
           guardians can reach you.
         </p>
       </div>
+
+      <GoogleLinkButton />
 
       <ProfileForm
         profileUser={profileUser as ProfileUser}

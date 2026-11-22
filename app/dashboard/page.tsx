@@ -12,5 +12,9 @@ export default async function DashboardIndexPage() {
     redirect("/sign-in")
   }
 
+  if (user.roleSelected === false) {
+    redirect("/select-role")
+  }
+
   redirect(dashboardPathForRole(user.role))
 }

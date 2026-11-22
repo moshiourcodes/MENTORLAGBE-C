@@ -327,9 +327,10 @@ import {
 } from "lucide-react";
 import { toast } from "sonner";
 
+import { GoogleButton } from "@/components/GoogleButton";
 import { authClient } from "@/lib/auth-client";
 
-type UserRole = "student" | "tutor";
+type UserRole = "student" | "tutor" | "admin";
 
 export default function SignUpPage() {
   const router = useRouter();
@@ -363,7 +364,7 @@ export default function SignUpPage() {
         name: name.trim(),
         email: email.trim().toLowerCase(),
         password,
-        role,
+        signupRole: role,
         callbackURL: `/dashboard/${role}`,
       });
 
@@ -390,7 +391,7 @@ export default function SignUpPage() {
         }
       ).role;
 
-      const allowedRoles: UserRole[] = ["student", "tutor"];
+      const allowedRoles: UserRole[] = ["student", "tutor", "admin"];
 
       if (
         typeof savedRole !== "string" ||
@@ -454,6 +455,18 @@ export default function SignUpPage() {
           <p className="mt-2 text-sm text-[#AAB6C7]">
             Join MentorLagbe and start your learning journey.
           </p>
+        </div>
+
+        <div className="mb-6 space-y-4">
+          <GoogleButton mode="signup" callbackURL="/dashboard" />
+
+          <div className="flex items-center gap-3">
+            <div className="h-px flex-1 bg-[#26374E]" />
+            <span className="text-xs font-semibold tracking-wide text-[#8FA0B5]">
+              OR
+            </span>
+            <div className="h-px flex-1 bg-[#26374E]" />
+          </div>
         </div>
 
         <form onSubmit={handleSignUp} className="space-y-5">
@@ -579,6 +592,7 @@ export default function SignUpPage() {
             >
               <option value="student">Student</option>
               <option value="tutor">Tutor</option>
+              <option value="admin">Admin</option>
             </select>
 
             <p className="mt-2 text-xs text-[#AAB6C7]">

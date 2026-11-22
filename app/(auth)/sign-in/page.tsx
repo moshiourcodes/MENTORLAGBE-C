@@ -547,6 +547,7 @@ import {
 } from "lucide-react";
 import { toast } from "sonner";
 
+import { GoogleButton } from "@/components/GoogleButton";
 import { authClient } from "@/lib/auth-client";
 
 type UserRole = "student" | "tutor" | "admin";
@@ -682,6 +683,18 @@ export default function SignInPage() {
           <p className="mt-2 text-sm text-[#6B7280] dark:text-slate-300">
             Sign in to continue to your MentorLagbe account.
           </p>
+        </div>
+
+        <div className="mb-6 space-y-4">
+          <GoogleButton mode="signin" callbackURL="/dashboard" />
+
+          <div className="flex items-center gap-3">
+            <div className="h-px flex-1 bg-border" />
+            <span className="text-xs font-semibold tracking-wide text-muted-foreground">
+              OR
+            </span>
+            <div className="h-px flex-1 bg-border" />
+          </div>
         </div>
 
         {/* Sign In Form */}

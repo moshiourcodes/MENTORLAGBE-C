@@ -231,7 +231,7 @@ export default function TuitionDetails({
           {/* LEFT CONTENT */}
           <div className="space-y-7">
             {/* Tuition Image */}
-            <div className="relative h-[300px] overflow-hidden rounded-2xl bg-slate-200 dark:bg-slate-800 sm:h-[420px]">
+            <div className="relative h-75 overflow-hidden rounded-2xl bg-slate-200 dark:bg-slate-800 sm:h-105">
               {tuition.bannerImage ? (
                 <div
                   role="img"
@@ -378,7 +378,7 @@ export default function TuitionDetails({
                 </div>
               </div>
 
-              <div className="mt-6 flex min-h-[120px] items-center justify-center border-t border-slate-100 text-center dark:border-slate-800">
+              <div className="mt-6 flex min-h-30 items-center justify-center border-t border-slate-100 text-center dark:border-slate-800">
                 <p className="max-w-md text-xs leading-6 text-slate-500 dark:text-slate-400">
                   No reviews yet. Accepted students will be able to
                   share feedback after their classes.

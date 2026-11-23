@@ -44,7 +44,7 @@ export default async function AdminTuitionsPage() {
       ) : (
         <div className="overflow-hidden rounded-2xl border border-border bg-card">
           <div className="overflow-x-auto">
-            <table className="w-full min-w-[900px] text-left text-sm">
+            <table className="w-full min-w-225 text-left text-sm">
               <thead className="bg-muted/50 text-xs font-semibold tracking-wide text-muted-foreground uppercase">
                 <tr>
                   <th className="px-5 py-3">Tuition</th>

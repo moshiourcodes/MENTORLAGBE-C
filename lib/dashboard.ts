@@ -796,7 +796,8 @@ function mapApplication(
     preferredSchedule: asString(doc.preferredSchedule),
     studentNote: asString(doc.studentNote),
     status,
-    appliedAt: doc.appliedAt,
+    // Legacy documents store the application date as createdAt.
+    appliedAt: doc.appliedAt ?? doc.createdAt,
   };
 }
 

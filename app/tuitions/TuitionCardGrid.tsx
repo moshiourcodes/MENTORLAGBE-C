@@ -3,6 +3,7 @@
 
 import { useEffect, useState } from "react";
 import TutionCard from "@/components/TutionCard";
+import { getExpressApiUrl } from "@/lib/api-url";
 import { RefreshCw } from "lucide-react";
 
 interface Tuition {
@@ -31,12 +32,9 @@ interface TuitionApiResponse {
   message?: string;
 }
 
-const API_URL =
-  process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
-
 // Fetch approved tuition listings from the Express API
 async function getApprovedTuitions(): Promise<Tuition[]> {
-  const response = await fetch(`${API_URL}/api/tuitions`, {
+  const response = await fetch(`${getExpressApiUrl()}/api/tuitions`, {
     method: "GET",
     cache: "no-store",
   });

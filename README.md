@@ -125,18 +125,24 @@ npm install
 
 **4. Configure environment variables**
 
-Create a `.env.local` file (see `.env.example`):
+Create a `.env.local` file from `.env.example`. Required variables:
 
 ```env
 BETTER_AUTH_DB_URI=
 BETTER_AUTH_SECRET=
 BETTER_AUTH_URL=http://localhost:3000
 NEXT_PUBLIC_BETTER_AUTH_URL=http://localhost:3000
+GOOGLE_CLIENT_ID=
+GOOGLE_CLIENT_SECRET=
 STRIPE_SECRET_KEY=
 STRIPE_WEBHOOK_SECRET=
 NEXT_PUBLIC_APP_URL=http://localhost:3000
-NEXT_PUBLIC_API_URL=http://localhost:5000
+NEXT_PUBLIC_API_BASE_URL=http://localhost:5000
 ```
+
+`BETTER_AUTH_URL` must be a clean origin with no trailing comment.
+`NEXT_PUBLIC_API_BASE_URL` is the Express backend origin. It is required in
+production; the localhost default is development-only.
 
 **5. Configure Stripe webhooks locally**
 
@@ -148,7 +154,17 @@ stripe listen --forward-to localhost:3000/api/payment/webhook
 
 Copy the printed `whsec_...` value into `STRIPE_WEBHOOK_SECRET`.
 
-**6. Run the development server**
+**6. Configure Google OAuth**
+
+Authorized redirect URI:
+
+```text
+http://localhost:3000/api/auth/callback/google
+```
+
+Use your production origin in deployed environments.
+
+**7. Run the development server**
 
 ```bash
 npm run dev

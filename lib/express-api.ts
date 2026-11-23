@@ -1,9 +1,7 @@
 import { headers } from "next/headers"
 
+import { getExpressApiUrl } from "@/lib/api-url"
 import { auth } from "@/lib/auth"
-
-export const EXPRESS_API_URL =
-  process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000"
 
 /**
  * Returns a short-lived JWT for the current Better Auth session, or null for
@@ -37,7 +35,7 @@ export async function fetchExpress(path: string, init: RequestInit = {}) {
     requestHeaders.set("Authorization", `Bearer ${token}`)
   }
 
-  return fetch(`${EXPRESS_API_URL}${path}`, {
+  return fetch(`${getExpressApiUrl()}${path}`, {
     ...init,
     headers: requestHeaders,
     cache: "no-store",

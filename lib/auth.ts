@@ -21,7 +21,7 @@ const allowedRoles = ["student", "tutor", "admin"] as const
 // JWTs are only a bridge for the separate Express API. Better Auth sessions
 // remain the primary authentication system.
 const jwtIssuer =
-  process.env.NEXT_PUBLIC_APP_URL ||
+ 
   process.env.BETTER_AUTH_URL ||
   "http://localhost:3000"
 const jwtAudience = "mentorlagbe-express"
